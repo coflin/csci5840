@@ -1,0 +1,160 @@
+! Startup-config last modified at Tue Sep 24 02:09:59 2024 by admin
+! device: r2 (cEOSLab, EOS-4.32.2F-38195967.4322F (engineering build))
+!
+no aaa root
+!
+username admin privilege 15 role network-admin secret sha512 $6$eNVciFFqTEJvraTS$KpdbjnRsMVLZUdn1B9ihchnC53KQavohuceuD.L3KQWJM/h7D5MsuCd/w4y.BZfX4If76FZgCpuQ95eQFcazW1
+!
+management api http-commands
+   no shutdown
+!
+daemon TerminAttr
+   exec /usr/bin/TerminAttr -ingestgrpcurl=unix:/var/run/ingestgrpc.sock -taillogs --ingestauth=key,user:user --gnmi -grpc
+!
+dhcp server
+   subnet 11.0.0.0/24
+      range 11.0.0.4 11.0.0.254
+      name VLAN10
+      default-gateway 11.0.0.3
+   !
+   subnet 12.0.0.0/24
+      range 12.0.0.4 12.0.0.254
+      name VLAN20
+      default-gateway 12.0.0.3
+   !
+   subnet 2010::/64
+      range 2010::4 2010::ffff:ffff:fffe
+      name VLAN10
+   !
+   subnet 2020::/64
+      range 2020::4 2020::ffff:ffff:fffe
+      name VLAN20
+   !
+   subnet 2030::/64
+      range 2030::4 2030::ffff:ffff:fffe
+      name VLAN30
+!
+no service interface inactive port-id allocation disabled
+!
+transceiver qsfp default-mode 4x10G
+!
+service routing protocols model multi-agent
+!
+hostname r2
+!
+snmp-server community public ro
+snmp-server host 192.168.100.1 version 2c public
+!
+spanning-tree mode mstp
+!
+system l1
+   unsupported speed action error
+   unsupported error-correction action error
+!
+vlan 10
+   name h1-h3
+!
+vlan 20
+   name h2
+!
+vlan 30
+   name h4
+!
+vlan 50
+   name ospf
+!
+vlan 100
+   name mgmt
+!
+management api gnmi
+   transport grpc default
+!
+management api netconf
+   transport ssh default
+!
+interface Ethernet1
+   speed forced 25gfull
+   switchport mode trunk
+!
+interface Ethernet2
+   switchport mode trunk
+!
+interface Ethernet4
+   no switchport
+   ip address 192.168.101.5/24
+!
+interface Management0
+   ip address 172.20.20.5/24
+   ipv6 address 2001:172:20:20::5/64
+!
+interface Vlan10
+   mtu 9214
+   ip address 11.0.0.2/24
+   dhcp server ipv4
+   dhcp server ipv6
+   ipv6 address 2010::2/64
+   ospfv3 ipv6 area 0.0.0.0
+   ip virtual-router address 11.0.0.3
+   ipv6 virtual-router address 2010::3
+!
+interface Vlan20
+   ip address 12.0.0.2/24
+   dhcp server ipv4
+   dhcp server ipv6
+   ipv6 address 2020::2/64
+   ospfv3 ipv6 area 0.0.0.0
+   ip virtual-router address 12.0.0.3
+   ipv6 virtual-router address 2020::3
+!
+interface Vlan30
+   dhcp server ipv4
+   dhcp server ipv6
+   ipv6 enable
+   ipv6 address 2030::2/64
+   ospfv3 ipv6 area 0.0.0.0
+   ipv6 virtual-router address 2030::3
+!
+interface Vlan50
+   ip address 100.0.0.2/29
+   ipv6 enable
+   ipv6 address 2050::2/64
+   ospfv3 ipv6 area 0.0.0.0
+!
+interface Vlan100
+   ip address 192.168.100.3/24
+!
+ip virtual-router mac-address 00:1c:73:00:00:99
+!
+ip routing
+!
+ipv6 unicast-routing
+!
+ip route 0.0.0.0/0 172.20.20.1
+ip route 192.168.102.0/24 192.168.101.1
+ip route 192.168.103.0/24 192.168.101.1
+!
+ipv6 route ::/0 2001:172:20:20::1
+!
+router multicast
+   ipv4
+      software-forwarding kernel
+   !
+   ipv6
+      software-forwarding kernel
+!
+router ospf 1
+   network 11.0.0.0/24 area 0.0.0.0
+   network 12.0.0.0/24 area 0.0.0.0
+   network 100.0.0.0/29 area 0.0.0.0
+   max-lsa 12000
+!
+router ospfv3
+   address-family ipv6
+!
+router rip
+   network 11.0.0.0/24
+   network 12.0.0.0/24
+   redistribute ospf
+   no shutdown
+!
+end

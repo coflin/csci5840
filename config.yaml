@@ -1,0 +1,67 @@
+name: netman
+
+topology:
+  kinds:
+    arista_ceos:
+      image:  ceos:4.32.2F
+    linux:
+      image:  custom-ubuntu
+    linux-webserver:
+      image:  ubuntu-h5
+  nodes:
+    r1:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/r1.cfg
+    r2:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/r2.cfg
+    r3:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/r3.cfg
+    r4:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/r4.cfg
+    r5:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/r5.cfg
+    s1:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/s1.cfg
+    s2:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/s2.cfg
+    s3:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/s3.cfg
+    s4:
+      kind: arista_ceos
+      startup-config: /home/student/git/cfgs/s4.cfg
+    h1:
+      kind: linux
+    h2:
+      kind: linux
+    h3:
+      kind: linux
+    h4:
+      kind: linux
+    webserver:
+      kind: linux
+
+  links:
+    - endpoints:  ["h1:eth1", "s1:eth1"]
+    - endpoints:  ["h2:eth1", "s1:eth2"]
+    - endpoints:  ["h3:eth1", "s2:eth1"]
+    - endpoints:  ["h4:eth1", "s2:eth2"]
+    - endpoints:  ["s1:eth3", "s2:eth3"]
+    - endpoints:  ["s1:eth4", "r1:eth1"]
+    - endpoints:  ["s2:eth4", "r2:eth1"]
+    - endpoints:  ["r1:eth2", "s3:eth2"]
+    - endpoints:  ["r2:eth2", "s4:eth2"]
+    - endpoints:  ["s3:eth1", "s4:eth1"]
+    - endpoints:  ["s3:eth3", "r3:eth2"]
+    - endpoints:  ["s4:eth3", "r4:eth2"]
+    - endpoints:  ["r3:eth3", "r5:eth1"]
+    - endpoints:  ["r4:eth3", "r5:eth2"]
+    - endpoints:  ["r3:eth1", "r4:eth1"]
+    - endpoints:  ["r5:eth3", "webserver:eth3"]
+    - endpoints:  ["s3:eth4", "host:eth1"]

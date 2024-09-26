@@ -1,0 +1,681 @@
+{
+  "name": "netman",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-612a39868233",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "h1": {
+      "index": "0",
+      "shortname": "h1",
+      "longname": "clab-netman-h1",
+      "fqdn": "h1.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/h1",
+      "kind": "linux",
+      "image": "custom-ubuntu",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.10",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::a",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/h1",
+        "clab-node-name": "h1",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "h2": {
+      "index": "1",
+      "shortname": "h2",
+      "longname": "clab-netman-h2",
+      "fqdn": "h2.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/h2",
+      "kind": "linux",
+      "image": "custom-ubuntu",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/h2",
+        "clab-node-name": "h2",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "h3": {
+      "index": "2",
+      "shortname": "h3",
+      "longname": "clab-netman-h3",
+      "fqdn": "h3.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/h3",
+      "kind": "linux",
+      "image": "custom-ubuntu",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.13",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::d",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/h3",
+        "clab-node-name": "h3",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "h4": {
+      "index": "3",
+      "shortname": "h4",
+      "longname": "clab-netman-h4",
+      "fqdn": "h4.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/h4",
+      "kind": "linux",
+      "image": "custom-ubuntu",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.9",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::9",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/h4",
+        "clab-node-name": "h4",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r1": {
+      "index": "4",
+      "shortname": "r1",
+      "longname": "clab-netman-r1",
+      "fqdn": "r1.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/r1",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.6",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::6",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:f5:5a:1d",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/r1",
+        "clab-node-name": "r1",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r2": {
+      "index": "5",
+      "shortname": "r2",
+      "longname": "clab-netman-r2",
+      "fqdn": "r2.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/r2",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.5",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::5",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:18:ef:39",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/r2",
+        "clab-node-name": "r2",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r3": {
+      "index": "6",
+      "shortname": "r3",
+      "longname": "clab-netman-r3",
+      "fqdn": "r3.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/r3",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.4",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::4",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:ac:e8:9d",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/r3",
+        "clab-node-name": "r3",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r4": {
+      "index": "7",
+      "shortname": "r4",
+      "longname": "clab-netman-r4",
+      "fqdn": "r4.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/r4",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.3",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::3",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:41:41:51",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/r4",
+        "clab-node-name": "r4",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r5": {
+      "index": "8",
+      "shortname": "r5",
+      "longname": "clab-netman-r5",
+      "fqdn": "r5.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/r5",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.14",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::e",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:ae:fc:ac",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/r5",
+        "clab-node-name": "r5",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s1": {
+      "index": "9",
+      "shortname": "s1",
+      "longname": "clab-netman-s1",
+      "fqdn": "s1.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/s1",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.12",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::c",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:58:4f:4d",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/s1",
+        "clab-node-name": "s1",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s2": {
+      "index": "10",
+      "shortname": "s2",
+      "longname": "clab-netman-s2",
+      "fqdn": "s2.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/s2",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.11",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::b",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:5a:35:f9",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/s2",
+        "clab-node-name": "s2",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s3": {
+      "index": "11",
+      "shortname": "s3",
+      "longname": "clab-netman-s3",
+      "fqdn": "s3.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/s3",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.15",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::f",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:28:e2:ac",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/s3",
+        "clab-node-name": "s3",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "s4": {
+      "index": "12",
+      "shortname": "s4",
+      "longname": "clab-netman-s4",
+      "fqdn": "s4.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/s4",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.2F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.2",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::2",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:54:b7:18",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/s4",
+        "clab-node-name": "s4",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    },
+    "webserver": {
+      "index": "13",
+      "shortname": "webserver",
+      "longname": "clab-netman-webserver",
+      "fqdn": "webserver.netman.io",
+      "group": "",
+      "labdir": "/home/student/git/clab-netman/webserver",
+      "kind": "linux",
+      "image": "custom-ubuntu",
+      "mgmt-net": "",
+      "mgmt-intf": "",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-612a39868233",
+        "clab-node-group": "",
+        "clab-node-kind": "linux",
+        "clab-node-lab-dir": "/home/student/git/clab-netman/webserver",
+        "clab-node-name": "webserver",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/config.yaml",
+        "containerlab": "netman"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "h1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:e7:bd:83",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:da:29:cd",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "h2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:37:7f:39",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:42:f2:1e",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "h3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:2b:74:84",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:75:2c:15",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "h4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:27:a3:58",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:f6:58:9b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s1",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:0c:82:5d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s2",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:8e:89:51",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s1",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:73:a4:00",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r1",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:75:2b:e4",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s2",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:7d:d0:b4",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r2",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:08:b3:ee",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r1",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:5c:3a:e3",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:7d:29:4c",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r2",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:74:70:7d",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s4",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:d1:cc:fc",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:04:86:41",
+        "peer": "z"
+      },
+      "z": {
+        "node": "s4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:09:e0:37",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s3",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:47:72:d7",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r3",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:69:15:69",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s4",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:a5:2a:25",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r4",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:e7:64:5f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r3",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:13:5c:19",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r5",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:38:c9:8f",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r4",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:6e:7d:5a",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r5",
+        "interface": "eth2",
+        "mac": "aa:c1:ab:1d:74:51",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r3",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:37:f8:4e",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r4",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:c1:7e:a9",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "r5",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:53:b5:fc",
+        "peer": "z"
+      },
+      "z": {
+        "node": "webserver",
+        "interface": "eth3",
+        "mac": "aa:c1:ab:e4:92:2b",
+        "peer": "a"
+      }
+    },
+    {
+      "a": {
+        "node": "s3",
+        "interface": "eth4",
+        "mac": "aa:c1:ab:d9:9f:55",
+        "peer": "z"
+      },
+      "z": {
+        "node": "host",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:53:ca:21",
+        "peer": "a"
+      }
+    }
+  ]
+}
