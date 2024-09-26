@@ -1,0 +1,42 @@
+username: admin
+password: admin
+insecure: true
+
+targets:
+  R1:
+    address: 192.168.100.2:6030
+  R2:
+    address: 192.168.100.3:6030
+  R3:
+    address: 192.168.100.4:6030
+  R4:
+    address: 192.168.100.5:6030
+  S1:
+    address: 192.168.100.6:6030
+  S2:
+    address: 192.168.100.7:6030
+  S3:
+    address: 192.168.100.8:6030
+  S4:
+    address: 192.168.100.9:6030
+
+subscriptions:
+  interface-counters:
+    paths:
+      - /interfaces/interface/state/oper-status
+      - /interfaces/interface/state/counters/in-octets
+      - /interfaces/interface/state/counters/out-octets
+      - /components/component/cpu/
+    sample-interval: 1s
+
+outputs:
+  influxdb:
+    type: influxdb
+    address: http://localhost:8086
+    org: netman
+    bucket: lab2-stream
+    token: UU04aDyKLDIm1G-2yApPchkOKCJ7SSlOtie7WBTw3OakIvjk9iF55p4ioZOHWxdvrJODqz4TngIpgzFVgQzivA==
+    override-timestamps:  false
+    timestamp-precision:  s
+    health-check-period:  30s
+    debug:  true
