@@ -7,6 +7,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/grafana')
+def grafana():
+    return redirect("http://localhost:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s")
+
 # Route to handle form submissions for adding new devices
 @app.route('/add-device', methods=['GET', 'POST'])
 def add_device():
