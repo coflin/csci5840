@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Device</title>
+</head>
+<body>
+    <h1>Add a New Device</h1>
+    <form action="/add-device" method="POST">
+        <label for="device_name">Device Name:</label>
+        <input type="text" id="device_name" name="device_name" required><br>
+
+        <label for="vendor">Vendor:</label>
+        <input type="text" id="vendor" name="vendor" required><br>
+
+        <label for="wan_ip">WAN IP:</label>
+        <input type="text" id="wan_ip" name="wan_ip" required><br>
+
+        <label for="routing_protocol">Routing Protocol:</label>
+        <input type="text" id="routing_protocol" name="routing_protocol" required><br>
+
+        <label for="j2_template">Jinja2 Template:</label>
+        <input type="text" id="j2_template" name="j2_template" required><br>
+
+        <button type="submit">Add Device</button>
+    </form>
+</body>
+</html>
+
