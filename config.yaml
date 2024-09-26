@@ -11,31 +11,31 @@ topology:
   nodes:
     r1:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/r1.cfg
+      startup-config: /home/student/git/csci5840/cfgs/r1.cfg
     r2:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/r2.cfg
+      startup-config: /home/student/git/csci5840/cfgs/r2.cfg
     r3:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/r3.cfg
+      startup-config: /home/student/git/csci5840/cfgs/r3.cfg
     r4:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/r4.cfg
+      startup-config: /home/student/git/csci5840/cfgs/r4.cfg
     r5:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/r5.cfg
+      startup-config: /home/student/git/csci5840/cfgs/r5.cfg
     s1:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/s1.cfg
+      startup-config: /home/student/git/csci5840/cfgs/s1.cfg
     s2:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/s2.cfg
+      startup-config: /home/student/git/csci5840/cfgs/s2.cfg
     s3:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/s3.cfg
+      startup-config: /home/student/git/csci5840/cfgs/s3.cfg
     s4:
       kind: arista_ceos
-      startup-config: /home/student/git/cfgs/s4.cfg
+      startup-config: /home/student/git/csci5840/cfgs/s4.cfg
     h1:
       kind: linux
     h2:
