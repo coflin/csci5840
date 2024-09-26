@@ -3,20 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Automation Dashboard</title>
+    <title>Network Automation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        /* Add some styling for the page */
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            margin-bottom: 20px;
+        }
+        .welcome-text {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 24px;
+        }
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+            display: none; /* Hide the iframe initially */
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation bar -->
-    <div class="navbar">
-        <a href="/" onclick="showGrafana()">Grafana Dashboard</a>
-        <a href="/add-device">Add New Device</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Network Automation</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showGrafana()">Grafana Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/add-device">Add New Device</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-text">
+            <h1>Welcome to one-stop shop for all your network automation needs!</h1>
+        </div>
+        <iframe id="grafanaFrame" src="http://localhost:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s"></iframe>
     </div>
 
-    <!-- Iframe for Grafana Dashboard -->
-    <iframe src="http://localhost:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s" style="width:100%; height:500px;"></iframe>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showGrafana() {
+            document.getElementById("grafanaFrame").style.display = "block"; // Show the iframe
+            document.querySelector(".welcome-text").style.display = "none"; // Hide the welcome message
+        }
+    </script>
 </body>
 </html>
 
