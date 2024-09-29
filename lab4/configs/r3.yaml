@@ -1,0 +1,83 @@
+device:
+  name: r3
+  admin_secret: "sha512 $6$W8DQLfLQ2LA3AhLt$1.wQOCNU4BzhbfuXYvTs0WMJW4MlM1p9YwpARSJWvwGznkuGk9lAbQUZPVKUIYDYZZ7FjOKkiLhTbEcLuR2FK0"
+  vlans:
+    - id: 50
+      name: ospf
+      ipv4_subnet: 100.0.0.0/29
+      ipv6_subnet: 2050::/64
+      dhcp_enabled: false
+      ospfv3:
+        area: 0.0.0.0
+    - id: 100
+      name: mgmt
+      ipv4_subnet: 192.168.100.0/24
+      ipv6_subnet: null
+      dhcp_enabled: false
+  interfaces:
+    - name: Ethernet1
+      ipv4: 200.0.0.1/30
+      ipv6: 2060::1/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+      ospfv3:
+        area: 0.0.0.0
+    - name: Ethernet2
+      ipv4: null
+      ipv6: null
+      mtu: null
+      speed: null
+      switchport_mode: trunk
+    - name: Ethernet3
+      ipv4: 103.0.0.1/30
+      ipv6: 2070::1/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+      ospfv3:
+        area: 0.0.0.0
+    - name: Ethernet4
+      ipv4: 192.168.102.4/24
+      ipv6: null
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Management0
+      ipv4: 172.20.20.4/24
+      ipv6: 2001:172:20:20::4/64
+  routes:
+    static:
+      - prefix: 0.0.0.0/0
+        next_hop: 172.20.20.1
+      - prefix: 192.168.101.0/24
+        next_hop: 192.168.102.1
+      - prefix: 192.168.103.0/24
+        next_hop: 192.168.102.1
+    ipv6_static:
+      - prefix: ::/0
+        next_hop: 2001:172:20:20::1
+  routing_protocols:
+    bgp:
+      as: 63000
+      neighbors:
+        - ip: 103.0.0.2
+          remote_as: 65000
+        - ip: 2070::2
+          remote_as: 65000
+      networks:
+        - 100.0.0.0/29
+        - 103.0.0.0/30
+        - 200.0.0.0/30
+    ospf:
+      id: 1
+      networks:
+        - prefix: 100.0.0.0/29
+          area: 0.0.0.0
+        - prefix: 103.0.0.0/30
+          area: 0.0.0.0
+        - prefix: 200.0.0.0/30
+          area: 0.0.0.0
+    ospfv3:
+      address_family: ipv6
+      redistribute_bgp: true

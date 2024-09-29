@@ -12,19 +12,14 @@
         .navbar {
             margin-bottom: 20px;
         }
-        iframe {
-            width: 100%;
-            height: calc(100vh - 150px); /* Adjust height to fill the remaining screen space */
-            border: none;
-        }
-        .grafana-container {
-            display: none; /* Start with the Grafana dashboard hidden */
+        .form-section {
+            display: none; /* Initially hide all form sections */
         }
     </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/" onclick="showHome()">Home</a>
+        <a class="navbar-brand" href="/">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,58 +36,53 @@
     </nav>
 
     <div class="container">
-        <div id="formContainer">
-            <h1>Add a New Device</h1>
-            <form action="/add-device" method="POST">
+        <h1>Add a New Device</h1>
+        <form id="deviceForm" action="/add-device" method="POST">
+            <div class="form-group">
+                <label for="router_type">Type of Router:</label>
+                <select class="form-control" id="router_type" name="router_type" onchange="showRouterForm()">
+                    <option value="">Select Router Type</option>
+                    <option value="Access">Access</option>
+                    <option value="Core">Core</option>
+                    <option value="Edge">Edge</option>
+                </select>
+            </div>
+
+            <div id="accessRouterForm" class="form-section">
+                <h3>Access Router Configuration</h3>
                 <div class="form-group">
-                    <label for="device_name">Device Name:</label>
+                    <label for="device_name">Hostname:</label>
                     <input type="text" class="form-control" id="device_name" name="device_name" required>
                 </div>
                 <div class="form-group">
-                    <label for="vendor">Vendor:</label>
-                    <input type="text" class="form-control" id="vendor" name="vendor" required>
+                    <label for="admin_secret">Admin Secret:</label>
+                    <input type="text" class="form-control" id="admin_secret" name="admin_secret" required>
                 </div>
                 <div class="form-group">
-                    <label for="wan_ip">WAN IP:</label>
-                    <input type="text" class="form-control" id="wan_ip" name="wan_ip" required>
+                    <label for="vlans">VLANs (JSON format):</label>
+                    <textarea class="form-control" id="vlans" name="vlans" rows="3" required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="routing_protocol">Routing Protocol:</label>
-                    <input type="text" class="form-control" id="routing_protocol" name="routing_protocol" required>
-                </div>
-                <div class="form-group">
-                    <label for="j2_template">Jinja2 Template:</label>
-                    <input type="text" class="form-control" id="j2_template" name="j2_template" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Device</button>
-            </form>
-        </div>
+                <!-- Add more fields as necessary for the Access Router configuration -->
+            </div>
 
-        <div class="grafana-container" id="grafanaContainer">
-            <h2 class="mt-4">Grafana Dashboard</h2>
-            <iframe id="grafanaFrame" src="http://localhost:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s"></iframe>
-        </div>
+            <button type="submit" class="btn btn-primary">Add Device</button>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-        function showGrafana() {
-            document.getElementById("formContainer").style.display = "none"; // Hide the form
-            document.getElementById("grafanaContainer").style.display = "block"; // Show the Grafana dashboard
-        }
-
-        function showForm() {
-            document.getElementById("formContainer").style.display = "block"; // Show the form
-            document.getElementById("grafanaContainer").style.display = "none"; // Hide the Grafana dashboard
-        }
-
-        function showHome() {
-            // Redirect to home page (index.html)
-            window.location.href = "/";
+        function showRouterForm() {
+            const routerType = document.getElementById("router_type").value;
+            document.querySelectorAll(".form-section").forEach(section => {
+                section.style.display = "none"; // Hide all sections
+            });
+            if (routerType === "Access") {
+                document.getElementById("accessRouterForm").style.display = "block"; // Show Access Router form
+            }
+            // Add more conditions for Core and Edge router forms if needed
         }
     </script>
 </body>
 </html>
-

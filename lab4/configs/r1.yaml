@@ -1,0 +1,89 @@
+device:
+  name: r1
+  admin_secret: "sha512 $6$1v5KssgFfTEv3kRB$CFH7Uc/MucFQkH1oznu3nlEX1loe9BtAI98kHsaAVKWPR.42BTGLBXec/H3LASP05lqo9yDs2537cY7hPVqkz1"
+  vlans:
+    - id: 10
+      name: h1-h3
+      ipv4_subnet: 11.0.0.1/24
+      ipv6_subnet: 2010::1/64
+      dhcp_enabled: false
+      ipv4_virtual_router_address: 11.0.0.3
+      ipv6_virtual_router_address: 2010::3
+      ospfv3:
+        area: 0.0.0.0
+    - id: 20
+      name: h2
+      ipv4_subnet: 12.0.0.1/24
+      ipv6_subnet: 2020::1/64
+      dhcp_enabled: false
+      ipv4_virtual_router_address: 12.0.0.3
+      ipv6_virtual_router_address: 2020::3
+      ospfv3:
+        area: 0.0.0.0
+    - id: 30
+      name: h4
+      ipv4_subnet: null
+      ipv6_subnet: 2030::1/64
+      dhcp_enabled: false
+      ipv6_virtual_router_address: 2030::3
+      ospfv3:
+        area: 0.0.0.0
+    - id: 50
+      name: ospf
+      ipv4_subnet: 100.0.0.1/29
+      ipv6_subnet: 2050::1/64
+      dhcp_enabled: false
+      ospfv3:
+        area: 0.0.0.0
+    - id: 100
+      name: mgmt
+      ipv4_subnet: 192.168.100.2/24
+      ipv6_subnet: null
+      dhcp_enabled: false
+  interfaces:
+    - name: Ethernet1
+      ipv4: null
+      ipv6: null
+      mtu: 9000
+      speed: 1000full
+      switchport_mode: trunk
+    - name: Ethernet2
+      ipv4: null
+      ipv6: null
+      switchport_mode: trunk
+    - name: Ethernet4
+      ipv4: 192.168.101.4/24
+      ipv6: null
+      switchport_mode: null
+    - name: Management0
+      ipv4: 172.20.20.6/24
+      ipv6: 2001:172:20:20::6/64
+      switchport_mode: null
+  routes:
+    static:
+      - prefix: 0.0.0.0/0
+        next_hop: 172.20.20.1
+      - prefix: 192.168.102.0/24
+        next_hop: 192.168.101.1
+      - prefix: 192.168.103.0/24
+        next_hop: 192.168.101.1
+    ipv6_static:
+      - prefix: ::/0
+        next_hop: 2001:172:20:20::1
+  routing_protocols:
+    ospf:
+      id: 1
+      networks:
+        - prefix: 11.0.0.0/24
+          area: 0.0.0.0
+        - prefix: 12.0.0.0/24
+          area: 0.0.0.0
+        - prefix: 100.0.0.0/29
+          area: 0.0.0.0
+        - prefix: 192.168.100.0/24
+          area: 0.0.0.0
+    rip:
+      networks:
+        - prefix: 11.0.0.0/24
+        - prefix: 12.0.0.0/24
+

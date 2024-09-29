@@ -1,0 +1,65 @@
+hostname {{ device.name }}
+
+username admin privilege 15 role network-admin secret {{ device.admin_secret }}
+
+management api http-commands
+   no shutdown
+
+management api gnmi
+   transport grpc default
+
+management api netconf
+   transport ssh default
+
+{% for vlan in device.vlans %}
+vlan {{ vlan.id }}
+   name {{ vlan.name }}
+{% endfor %}
+
+{% for interface in device.interfaces %}
+interface {{ interface.name }}
+   {% if interface.ipv4 %}
+   ip address {{ interface.ipv4 }}
+   {% endif %}
+   {% if interface.switchport_mode %}
+   switchport mode {{ interface.switchport_mode }}
+   {% else %}
+   no switchport
+   {% endif %}
+   {% if interface.ipv6 %}
+   ipv6 address {{ interface.ipv6 }}
+   {% endif %}
+{% endfor %}
+
+ip routing
+ipv6 unicast-routing
+
+{% for route in device.routes.static %}
+ip route {{ route.prefix }} {{ route.next_hop }}
+{% endfor %}
+
+{% for ipv6_route in device.routes.ipv6_static %}
+ipv6 route {{ ipv6_route.prefix }} {{ ipv6_route.next_hop }}
+{% endfor %}
+
+router bgp {{ device.routing_protocols.bgp.as }}
+{% for neighbor in device.routing_protocols.bgp.neighbors %}
+   neighbor {{ neighbor.ip }} remote-as {{ neighbor.remote_as }}
+{% endfor %}
+   redistribute connected
+   !
+   address-family ipv4
+   {% for route in device.routing_protocols.bgp.ipv4_networks %}
+      network {{ route.prefix }}
+   {% endfor %}
+   !
+   address-family ipv6
+   {% for neighbor in device.routing_protocols.bgp.neighbors %}
+      {% if '::' in neighbor.ip %}
+         neighbor {{ neighbor.ip }} activate
+      {% endif %}
+   {% endfor %}
+   {% for route in device.routing_protocols.bgp.ipv6_networks %}
+	 network {{ route.prefix }}
+   {% endfor %}
+

@@ -1,0 +1,79 @@
+device:
+  name: r4
+  admin_secret: "sha512 $6$3SIqhcfdJMzgrJRd$J9rogZtWsCOnd.vv6nCAX5JFAYI9TymLrSS39Nqm57kA0gbkfws1Ceq6usug9ma.Vkq1SpaMdL1.X8Qfa6YFB1"
+  vlans:
+    - id: 50
+      name: ospf
+      ipv4_subnet: 100.0.0.4/29
+      ipv6_subnet: 2050::4/64
+      dhcp_enabled: false
+      ospfv3:
+        area: 0.0.0.0
+    - id: 100
+      name: mgmt
+      ipv4_subnet: 192.168.100.5/24
+      ipv6_subnet: null
+      dhcp_enabled: false
+  interfaces:
+    - name: Ethernet1
+      ipv4: 200.0.0.2/30
+      ipv6: 2060::2/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+      ospfv3:
+        area: 0.0.0.0
+    - name: Ethernet2
+      ipv4: null
+      ipv6: null
+      mtu: null
+      speed: null
+      switchport_mode: trunk
+    - name: Ethernet3
+      ipv4: 104.0.0.1/30
+      ipv6: 2080::1/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Ethernet4
+      ipv4: 192.168.102.5/24
+      ipv6: null
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Management0
+      ipv4: 172.20.20.3/24
+      ipv6: 2001:172:20:20::3/64
+  routes:
+    static:
+      - prefix: 0.0.0.0/0
+        next_hop: 172.20.20.1
+      - prefix: 192.168.101.0/24
+        next_hop: 192.168.102.1
+      - prefix: 192.168.103.0/24
+        next_hop: 192.168.102.1
+    ipv6_static:
+      - prefix: ::/0
+        next_hop: 2001:172:20:20::1
+  routing_protocols:
+    bgp:
+      as: 64000
+      neighbors:
+        - ip: 104.0.0.2
+          remote_as: 65000
+        - ip: 2080::2
+          remote_as: 65000
+      networks:
+        - 100.0.0.0/29
+        - 104.0.0.0/30
+        - 200.0.0.0/30
+    ospf:
+      id: 1
+      networks:
+        - prefix: 100.0.0.0/29
+          area: 0.0.0.0
+        - prefix: 104.0.0.0/30
+          area: 0.0.0.0
+        - prefix: 200.0.0.0/30
+          area: 0.0.0.0
+

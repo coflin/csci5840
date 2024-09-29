@@ -1,0 +1,123 @@
+hostname {{ device.name }}
+
+username admin privilege 15 role network-admin secret {{ device.admin_secret }}
+
+management api http-commands
+   no shutdown
+
+daemon TerminAttr
+   exec /usr/bin/TerminAttr -ingestgrpcurl=unix:/var/run/ingestgrpc.sock -taillogs --ingestauth=key,user:user --gnmi -grpc
+
+{% for vlan in device.vlans %}
+vlan {{ vlan.id }}
+   name {{ vlan.name }}
+{% endfor %}
+
+{% set dhcp_enabled = device.vlans | selectattr('dhcp_enabled', 'equalto', true) | list %}
+{% if dhcp_enabled %}
+dhcp server
+{% for vlan in dhcp_enabled %}
+   {% if vlan.ipv4_subnet %}
+      subnet {{ vlan.ipv4_subnet }}
+         range {{ vlan.dhcp_range_start }} {{ vlan.dhcp_range_end }}
+         name {{ vlan.name }}
+         default-gateway {{ vlan.default_gateway }}
+   {% endif %}
+   !
+   {% if vlan.ipv6_subnet %}
+      subnet {{ vlan.ipv6_subnet }}
+         range {{ vlan.dhcpv6_range_start }} {{ vlan.dhcpv6_range_end }}
+         name {{ vlan.name }}
+   {% endif %}
+{% endfor %}
+{% endif %}
+
+snmp-server community public ro
+snmp-server host 192.168.100.1 version 2c public
+
+management api gnmi
+   transport grpc default
+
+management api netconf
+   transport ssh default
+
+{% for interface in device.interfaces %}
+interface {{ interface.name }}
+   {% if interface.switchport_mode %}
+   switchport mode {{ interface.switchport_mode }}
+   {% else %}
+   no switchport
+   {% endif %}
+   {% if interface.ipv4 %}
+   ip address {{ interface.ipv4 }}
+   {% endif %}
+   {% if interface.mtu %}
+   mtu {{ interface.mtu }}
+   {% endif %}
+   {% if interface.speed %}
+   speed forced {{ interface.speed }}
+   {% endif %}
+   {% if interface.ipv6 %}
+   ipv6 address {{ interface.ipv6 }}
+   {% endif %}
+{% endfor %}
+
+{% for vlan in device.vlans %}
+interface Vlan{{ vlan.id }}
+   {% if vlan.mtu %}
+   mtu {{ vlan.mtu }}
+   {% endif %}
+   {% if vlan.ipv4_subnet %}
+   ip address {{ vlan.ipv4_subnet }}
+   {% endif %}
+   {% if vlan.dhcp_enabled %}
+   dhcp server ipv4
+   dhcp server ipv6
+   {% endif %}
+   {% if vlan.ipv6_subnet %}
+   ipv6 enable
+   ipv6 address {{ vlan.ipv6_subnet }}
+   {% endif %}
+   {% if vlan.ospfv3 %}
+   ospfv3 ipv6 area {{ vlan.ospfv3.area }}
+   {% endif %}
+   {% if vlan.ipv4_virtual_router_address %}
+   ip virtual-router address {{ vlan.ipv4_virtual_router_address }}
+   {% endif %}
+   {% if vlan.ipv6_virtual_router_address %}
+   ipv6 virtual-router address {{ vlan.ipv6_virtual_router_address }}
+   {% endif %}
+!
+{% endfor %}
+
+ip virtual-router mac-address 00:1c:73:00:00:99
+
+ip routing
+ipv6 unicast-routing
+
+{% for route in device.routes.static %}
+ip route {{ route.prefix }} {{ route.next_hop }}
+{% endfor %}
+
+{% for ipv6_route in device.routes.ipv6_static %}
+ipv6 route {{ ipv6_route.prefix }} {{ ipv6_route.next_hop }}
+{% endfor %}
+
+router ospf {{ device.routing_protocols.ospf.id }}
+{% for network in device.routing_protocols.ospf.networks %}
+   network {{ network.prefix }} area {{ network.area }}
+{% endfor %}
+   max-lsa 12000
+
+router ospfv3
+   address-family ipv6
+
+router rip
+{% for network in device.routing_protocols.rip.networks %}
+   network {{ network.prefix }}
+{% endfor %}
+   redistribute ospf
+   no shutdown
+
+end
+

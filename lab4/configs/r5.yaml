@@ -1,0 +1,64 @@
+device:
+  name: r5
+  admin_secret: "sha512 $6$Kn1KDyu5trydu/np$8.L4jNueNiWUOCxwjterb.Uq.zUlOxcMN5UqUPsvemjBGYI/UsfeqCIxa..s8fXwqmpJqIdDD1DFl3Ga6MPGL1"
+  vlans:
+    - id: 100
+      name: mgmt
+      ipv4_subnet: 192.168.100.0/24
+      ipv6_subnet: null
+      dhcp_enabled: false
+  interfaces:
+    - name: Ethernet1
+      ipv4: 103.0.0.2/30
+      ipv6: 2070::2/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Ethernet2
+      ipv4: 104.0.0.2/30
+      ipv6: 2080::2/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Ethernet3
+      ipv4: 110.0.0.1/30
+      ipv6: 2090::1/64
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Ethernet4
+      ipv4: 192.168.103.2/24
+      ipv6: null
+      mtu: null
+      speed: null
+      switchport_mode: null
+    - name: Management0
+      ipv4: 172.20.20.14/24
+      ipv6: 2001:172:20:20::e/64
+  routes:
+    static:
+      - prefix: 0.0.0.0/0
+        next_hop: 172.20.20.1
+      - prefix: 192.168.101.0/24
+        next_hop: 192.168.103.1
+      - prefix: 192.168.102.0/24
+        next_hop: 192.168.103.1
+    ipv6_static:
+      - prefix: ::/0
+        next_hop: 2001:172:20:20::1
+  routing_protocols:
+    bgp:
+      as: 65000
+      neighbors:
+        - ip: 103.0.0.1
+          remote_as: 63000
+        - ip: 104.0.0.1
+          remote_as: 64000
+        - ip: 2070::1
+          remote_as: 63000
+        - ip: 2080::1
+          remote_as: 64000
+      ipv4_networks:
+        - prefix: 110.0.0.0/30
+      ipv6_networks:
+        - prefix: 2090::/64

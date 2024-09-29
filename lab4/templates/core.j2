@@ -1,0 +1,103 @@
+hostname {{ device.name }}
+
+username admin privilege 15 role network-admin secret {{ device.admin_secret }}
+
+management api http-commands
+   no shutdown
+
+management api gnmi
+   transport grpc default
+
+management api netconf
+   transport ssh default
+
+snmp-server community public ro
+snmp-server host 192.168.100.1 version 2c public
+
+{% for vlan in device.vlans %}
+vlan {{ vlan.id }}
+   name {{ vlan.name }}
+{% endfor %}
+
+{% for interface in device.interfaces %}
+interface {{ interface.name }}
+   {% if interface.switchport_mode %}
+   switchport mode {{ interface.switchport_mode }}
+   {% else %}
+   no switchport
+   {% endif %}
+   {% if interface.ipv4 %}
+   ip address {{ interface.ipv4 }}
+   {% endif %}
+   {% if interface.ipv6 %}
+   ipv6 address {{ interface.ipv6 }}
+   {% endif %}
+   {% if interface.ospfv3 %}
+   ospfv3 ipv6 area {{ interface.ospfv3.area }}
+   {% endif %}
+{% endfor %}
+
+{% for vlan in device.vlans %}
+interface Vlan{{ vlan.id }}
+   {% if vlan.mtu %}
+   mtu {{ vlan.mtu }}
+   {% endif %}
+   {% if vlan.ipv4_subnet %}
+   ip address {{ vlan.ipv4_subnet }}
+   {% endif %}
+   {% if vlan.ipv6_subnet %}
+   ipv6 enable
+   ipv6 address {{ vlan.ipv6_subnet }}
+   {% endif %}
+   {% if vlan.ospfv3 %}
+   ospfv3 ipv6 area {{ vlan.ospfv3.area }}
+   {% endif %}
+!
+{% endfor %}
+
+
+ip routing
+ipv6 unicast-routing
+
+{% for route in device.routes.static %}
+ip route {{ route.prefix }} {{ route.next_hop }}
+{% endfor %}
+
+{% for ipv6_route in device.routes.ipv6_static %}
+ipv6 route {{ ipv6_route.prefix }} {{ ipv6_route.next_hop }}
+{% endfor %}
+
+router ospf {{ device.routing_protocols.ospf.id }}
+   redistribute bgp
+   {% for network in device.routing_protocols.ospf.networks %}
+   network {{ network.prefix }} area {{ network.area }}
+   {% endfor %}
+   max-lsa 12000
+
+router ospfv3
+   address-family ipv6
+      redistribute bgp
+
+router bgp {{ device.routing_protocols.bgp.as }}
+{% for neighbor in device.routing_protocols.bgp.neighbors %}
+   neighbor {{ neighbor.ip }} remote-as {{ neighbor.remote_as }}
+{% endfor %}
+   redistribute connected
+   redistribute ospf
+   redistribute ospfv3
+   !
+   address-family ipv4
+   {% if device.routing_protocols.bgp.networks %}
+   {% for network in device.routing_protocols.bgp.networks %}
+      network {{ network }}
+   {% endfor %}
+   {% else %}
+      network
+   {% endif %}
+   !
+   address-family ipv6
+   {% for neighbor in device.routing_protocols.bgp.neighbors %}
+      {% if '::' in neighbor.ip %} 
+         neighbor {{ neighbor.ip }} activate
+      {% endif %}
+   {% endfor %}
