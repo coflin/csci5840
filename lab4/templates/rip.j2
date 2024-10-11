@@ -1,0 +1,6 @@
+router rip
+{% for network in device.routing_protocols.rip.networks %}
+   network {{ network.prefix }}
+{% endfor %}
+   redistribute ospf
+   no shutdown

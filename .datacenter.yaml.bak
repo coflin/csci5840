@@ -1,0 +1,26 @@
+name: datacenter
+
+topology:
+  kinds:
+    arista_ceos:
+      image:  ceos:4.32.2F
+    linux:
+      image:  custom-ubuntu
+  nodes:
+    s1:
+      kind: arista_ceos
+      startup-config: /home/student/git/csci5840/dc-cfgs/s1.cfg
+    s2:
+      kind: arista_ceos
+      startup-config: /home/student/git/csci5840/dc-cfgs/s2.cfg
+    s3:
+      kind: arista_ceos
+      startup-config: /home/student/git/csci5840/dc-cfgs/s3.cfg
+  links:
+    #- endpoints:  ["s1:eth1", "s2:eth1"]
+    #- endpoints:  ["s1:eth2", "s2:eth2"]
+    #- endpoints:  ["s1:eth3", "s2:eth3"]
+    - endpoints:  ["s1:eth4", "s3:eth4"]
+    - endpoints:  ["s1:eth5", "s3:eth5"]
+    - endpoints:  ["s2:eth6", "s3:eth6"]
+    - endpoints:  ["s2:eth7", "s3:eth7"]

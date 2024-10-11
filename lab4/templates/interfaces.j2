@@ -1,0 +1,20 @@
+{% for interface in device.interfaces %}
+interface {{ interface.name }}
+   {% if interface.switchport_mode %}
+   switchport mode {{ interface.switchport_mode }}
+   {% else %}
+   no switchport
+   {% endif %}
+   {% if interface.ipv4 %}
+   ip address {{ interface.ipv4 }}
+   {% endif %}
+   {% if interface.mtu %}
+   mtu {{ interface.mtu }}
+   {% endif %}
+   {% if interface.speed %}
+   speed forced {{ interface.speed }}
+   {% endif %}
+   {% if interface.ipv6 %}
+   ipv6 address {{ interface.ipv6 }}
+   {% endif %}
+{% endfor %}

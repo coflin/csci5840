@@ -1,0 +1,45 @@
+device:
+  name: r1
+  vlans:
+  - id: '10'
+    name: h1-h3
+    ipv4_subnet: 11.0.0.2/24
+    ipv6_subnet: 2010::2/64
+    ospfv3:
+      area: 0.0.0.0
+    dhcp_enabled: true
+    dhcp_range_start: 11.0.0.10
+    dhcp_range_end: 11.0.0.50
+    default_gateway: 11.0.0.3
+    dhcpv6_range_start: 2010::2
+    dhcpv6_range_end: 2010::ffff:ffff:fffe
+    ipv4_virtual_router_address: 11.0.0.3
+    ipv6_virtual_router_address: 2010::3
+  interfaces:
+  - name: Ethernet1
+    ipv4: null
+    ipv6: null
+    switchport_mode: trunk
+  - name: Ethernet2
+    ipv4: 192.168.101.4/24
+    ipv6: 2020::2/64
+    switchport_mode: null
+  routes:
+    static:
+    - prefix: 0.0.0.0/0
+      next_hop: 172.20.20.1
+    ipv6_static:
+    - prefix: ::/0
+      next_hop: 2001:172:20:20::1
+  routing_protocols:
+    ospf:
+      id: '1'
+      networks:
+      - prefix: 11.0.0.0/24
+        area: 0.0.0.0
+      - prefix: 12.0.0.0/24
+        area: 0.0.0.0
+    rip:
+      networks:
+      - prefix: 11.0.0.0/24
+      - prefix: 12.0.0.0/24

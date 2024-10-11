@@ -1,0 +1,5 @@
+router bgp {{ device.routing_protocols.bgp.asn }}
+   neighbor {{ device.routing_protocols.bgp.neighbor.ip }} remote-as {{ device.routing_protocols.bgp.neighbor.asn }}
+{% for network in device.routing_protocols.bgp.networks %}
+   network {{ network.prefix }}
+{% endfor %}

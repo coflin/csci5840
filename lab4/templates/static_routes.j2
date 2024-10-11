@@ -1,0 +1,7 @@
+{% for route in device.routes.static %}
+ip route {{ route.prefix }} {{ route.next_hop }}
+{% endfor %}
+
+{% for ipv6_route in device.routes.ipv6_static %}
+ipv6 route {{ ipv6_route.prefix }} {{ ipv6_route.next_hop }}
+{% endfor %}
