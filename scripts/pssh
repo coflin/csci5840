@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Usage: ./pssh <router_name>
+# Example: ./pssh r1
+
+if [ $# -ne 1 ]; then
+  echo "Usage: $0 <router_name>"
+  exit 1
+fi
+
+ROUTER=$1
+CSV_FILE="/home/student/git/csci5840/scripts/sshInfo.csv"
+
+# Initialize variables to store router details
+ip=""
+username=""
+password=""
+
+# Read the CSV file and find the matching router
+while IFS=, read -r router_name device_type router_ip router_username router_password; do
+  if [[ "$router_name" == "$ROUTER" ]]; then
+    ip=$router_ip
+    username=$router_username
+    password=$router_password
+    break  # Exit the loop once we find the matching router
+  fi
+done < <(tail -n +2 "$CSV_FILE")  # Skip the header
+
+# Check if the router was found
+if [[ -z "$ip" || -z "$username" || -z "$password" ]]; then
+  echo "Error: Router $ROUTER not found in $CSV_FILE."
+  exit 1
+fi
+
+# Connect to the router using sshpass
+echo "Connecting to $ROUTER ($ip) as $username..."
+sshpass -p "$password" ssh -tt -o StrictHostKeyChecking=no "$username@$ip"
+

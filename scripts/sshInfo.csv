@@ -1,0 +1,5 @@
+Routers,Device_Type,IP,Username,Password
+r1,arista_eos,192.168.100.2,admin,CsAEKQ
+r2,arista_eos,192.168.100.3,admin,MRKoAw
+r3,arista_eos,192.168.100.4,admin,8tWV4A
+r4,arista_eos,192.168.100.5,admin,KYP6sQ
