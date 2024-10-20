@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Run J2Lint on all Jinja2 template files in the directory
                 sh '''
-                j2lint template-generator/*.j2 || true
+                j2lint template-generator/templates/*.j2 || true
                 '''
             }
         }
