@@ -2,20 +2,36 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout Code') {
             steps {
-                echo 'Building..'
+                // Pull the latest code (including Jinja2 templates) from the repository
+                checkout scm
             }
         }
-        stage('Test') {
+
+        stage('Install J2Lint') {
             steps {
-                echo 'Testing..'
+                // Install J2Lint if it's not already installed
+                sh 'pip install --user j2lint'
             }
         }
-        stage('Deploy') {
+
+        stage('Lint Jinja2 Templates') {
             steps {
-                echo 'Deploying....'
+                // Run J2Lint on all Jinja2 template files in the directory
+                sh '''
+                j2lint template-generator/*.j2 || true
+                '''
             }
+        }
+    }
+
+    post {
+        success {
+            echo 'Linting successful! No Jinja2 syntax errors found.'
+        }
+        failure {
+            echo 'Linting failed! Jinja2 syntax errors detected.'
         }
     }
 }

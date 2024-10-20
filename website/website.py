@@ -10,7 +10,7 @@ def index():
 
 @app.route('/grafana')
 def grafana():
-    return redirect("http://localhost:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s")
+    return redirect("http://10.224.77.53:3000/d/ddysd3va691xce/device-statistics?orgId=1&refresh=5s")
 
 def clean_empty_fields(data):
     return None if data == '' else data
@@ -91,7 +91,7 @@ def add_device():
                     }
                 }
             }
-            filename = f"/home/student/git/csci5840/lab4/{device['name']}_access.yaml"
+            filename = f"/home/student/git/csci5840/template-generator/{device['name']}_access.yaml"
 
         elif router_type == 'Core':
             # Core router details
@@ -166,7 +166,7 @@ def add_device():
                     }
                 }
             }
-            filename = f"/home/student/git/csci5840/lab4/{device['name']}_core.yaml"
+            filename = f"/home/student/git/csci5840/template-generator/{device['name']}_core.yaml"
 
         # Generate and save the YAML file
         yaml_data = yaml.dump({'device': device}, sort_keys=False)

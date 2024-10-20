@@ -1,0 +1,29 @@
+t=2024-10-14T16:52:04-0600 lvl=info msg="open config file" path=/home/student/git/csci5840/ngrok/config.yml err=nil
+t=2024-10-14T16:52:04-0600 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2024-10-14T16:52:04-0600 lvl=info msg="client session established" obj=tunnels.session
+t=2024-10-14T16:52:04-0600 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2024-10-14T16:52:04-0600 lvl=info msg="started tunnel" obj=tunnels name=jenkins addr=http://localhost:8000 url=https://fc4e-128-138-64-27.ngrok-free.app
+t=2024-10-14T16:52:33-0600 lvl=info msg="join connections" obj=join id=f03d1263a96f l=127.0.0.1:8000 r=128.138.64.27:56994
+t=2024-10-14T16:52:33-0600 lvl=info msg="join connections" obj=join id=3b63a760b6ff l=127.0.0.1:8000 r=128.138.64.27:56994
+t=2024-10-14T16:52:33-0600 lvl=info msg="join connections" obj=join id=d7dac30aabea l=127.0.0.1:8000 r=128.138.64.27:56994
+t=2024-10-14T16:54:45-0600 lvl=info msg="join connections" obj=join id=6b4989e89f35 l=127.0.0.1:8000 r=140.82.115.10:34710
+t=2024-10-14T17:29:22-0600 lvl=info msg="join connections" obj=join id=ea56b665319d l=127.0.0.1:8000 r=140.82.115.11:60830
+t=2024-10-14T17:33:36-0600 lvl=info msg="join connections" obj=join id=7471a006a9c5 l=127.0.0.1:8000 r=140.82.115.61:60886
+t=2024-10-14T17:37:50-0600 lvl=info msg="join connections" obj=join id=a0977976179e l=127.0.0.1:8000 r=140.82.115.110:27510
+t=2024-10-14T17:42:20-0600 lvl=info msg="join connections" obj=join id=c67ed2b7cf9a l=127.0.0.1:8000 r=140.82.115.96:17008
+t=2024-10-17T16:52:13-0600 lvl=info msg="update available" obj=updater
+t=2024-10-17T22:52:13-0600 lvl=info msg="update available" obj=updater
+t=2024-10-18T04:52:13-0600 lvl=info msg="update available" obj=updater
+t=2024-10-18T10:52:14-0600 lvl=info msg="update available" obj=updater
+t=2024-10-18T16:52:14-0600 lvl=info msg="update available" obj=updater
+t=2024-10-18T22:52:14-0600 lvl=info msg="update available" obj=updater
+t=2024-10-19T04:52:14-0600 lvl=info msg="update available" obj=updater
+t=2024-10-19T09:08:17-0600 lvl=eror msg="session closed, starting reconnect loop" obj=tunnels.session obj=csess id=963820ef29f4 err="read EOF from remote peer"
+t=2024-10-19T09:08:17-0600 lvl=info msg="client session established" obj=tunnels.session
+t=2024-10-19T09:08:17-0600 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2024-10-19T09:08:42-0600 lvl=eror msg="heartbeat timeout, terminating session" obj=tunnels.session obj=csess id=65e8ed3f7f0e clientid=5fb03a2cf8bdca671ec2a42b0f45ea06
+t=2024-10-19T10:52:14-0600 lvl=info msg="update available" obj=updater
+t=2024-10-19T16:52:15-0600 lvl=info msg="update available" obj=updater
+t=2024-10-19T22:52:15-0600 lvl=info msg="update available" obj=updater
+t=2024-10-20T04:52:15-0600 lvl=info msg="update available" obj=updater
+t=2024-10-20T10:52:15-0600 lvl=info msg="update available" obj=updater

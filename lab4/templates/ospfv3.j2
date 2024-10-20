@@ -1,7 +1,0 @@
-router ospfv3
-   address-family ipv6
-{% for vlan in device.vlans %}
-   {% if vlan.ospfv3 %}
-      ospfv3 ipv6 area {{ vlan.ospfv3.area }}
-   {% endif %}
-{% endfor %}

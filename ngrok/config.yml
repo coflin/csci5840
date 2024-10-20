@@ -1,0 +1,8 @@
+version: "2"
+authtoken: 2nRo7DVm8WtYDEyNX9Fou6KSbvO_H3GeLA9gHwuMgSLko5mr
+region: us
+tunnels:
+  jenkins:
+    addr: 8000  # Ensure this is the correct port for Jenkins
+    proto: http
+

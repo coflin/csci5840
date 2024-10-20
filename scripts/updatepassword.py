@@ -74,8 +74,8 @@ def main():
             if net_connect and updatePassword(net_connect, info["IP"], new_password):
                 updatePasswordFile('/home/student/git/csci5840/scripts/sshInfo.csv', info["IP"], new_password)
         
-        logger.info("\nWaiting 1 minute before the next update...\n")
-        time.sleep(60)  # Wait for 10 seconds before the next iteration
+        logger.info("\nWaiting 1 hour before the next update...\n")
+        time.sleep(3600)  # Wait for 10 seconds before the next iteration
 
 if __name__ == "__main__":
     main()
