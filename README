@@ -1,1 +1,52 @@
-Test README file
+CSCI 5840 Network Automation
+Description
+
+This repository contains code and resources for network automation, utilizing Jinja2 templates and YAML files to configure network devices. The project leverages tools like J2Lint for linting, Containerlab for simulation, and integration with Jenkins for continuous integration.
+Features
+
+    Jinja2 Templates for Configuration
+    YAML file generation
+    Automated syntax checking with J2Lint
+    Continuous integration with Jenkins
+
+Setup Instructions
+
+    Clone the repository:
+
+    bash
+
+git clone https://github.com/coflin/csci5840.git
+
+Install dependencies:
+
+bash
+
+    pip install -r requirements.txt
+
+Running the Project
+
+    Generate YAML from templates:
+
+    bash
+
+python generate_yaml.py
+
+Lint templates:
+
+bash
+
+    j2lint templates/
+
+Directory Structure
+
+bash
+
+├── config-templates/  # Jinja2 templates
+├── generated-configs/ # Generated YAML files
+├── clab-netman/       # Containerlab network topology
+├── Jenkinsfile        # Jenkins CI configuration
+└── README.md          # Project overview
+
+Contributing
+
+Feel free to contribute by creating issues or pull requests.
