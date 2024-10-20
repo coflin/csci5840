@@ -1,6 +1,6 @@
 CSCI 5840 Network Automation
-Description
 
+Description
 This repository contains code and resources for network automation, utilizing Jinja2 templates and YAML files to configure network devices. The project leverages tools like J2Lint for linting, Containerlab for simulation, and integration with Jenkins for continuous integration.
 Features
 
