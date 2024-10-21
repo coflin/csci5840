@@ -576,11 +576,11 @@ function checkJenkinsStatus() {
                 .then(data => {
                     if (data.status === 'SUCCESS') {
                         document.getElementById('pushConfigBtn').disabled = false;
-                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job was successful! You may push the config now.";
                         clearInterval(interval);  // Stop polling after success
                     }
                     else {
-                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job failed. Please check for errors in the Jenkins console.";
                         clearInterval(interval);  // Stop polling after failure
                     }
                 })
