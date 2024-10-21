@@ -574,29 +574,23 @@ function checkJenkinsStatus() {
             fetch('/check-jenkins-status')
                 .then(response => response.json())
                 .then(data => {
-                    const lastBuildUrl = data.lastCompletedBuild.url + 'api/json';
-                    return fetch(lastBuildUrl); // Fetch the actual build result
-                })
-                .then(response => response.json())
-                .then(buildData => {
-                    if (buildData.result === 'SUCCESS') {
+                    if (data.status === 'SUCCESS') {
                         document.getElementById('pushConfigBtn').disabled = false;
                         document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
                         clearInterval(interval);  // Stop polling after success
-                    } else if (buildData.result === 'FAILURE') {
+                    } else if (data.status === 'PENDING') {
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
+                    } else {
                         document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
                         clearInterval(interval);  // Stop polling after failure
-                    } else {
-                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
                     }
                 })
                 .catch(error => {
                     document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
                 });
-        }, 5000);
-    }, 30000);
+        }, 5000); // Check Jenkins every 5 seconds
+    }, 30000); // Start checking after 30 seconds
 }
-
 
 // Poll Jenkins every 5 seconds after form submission
     document.querySelector('form').addEventListener('submit', function (e) {
