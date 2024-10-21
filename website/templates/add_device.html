@@ -578,9 +578,8 @@ function checkJenkinsStatus() {
                         document.getElementById('pushConfigBtn').disabled = false;
                         document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
                         clearInterval(interval);  // Stop polling after success
-                    } else if (data.status === 'PENDING') {
-                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
-                    } else {
+                    }
+                    else {
                         document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
                         clearInterval(interval);  // Stop polling after failure
                     }
