@@ -60,6 +60,6 @@ router bgp {{ device.routing_protocols.bgp.as }}
       {% endif %}
    {% endfor %}
    {% for route in device.routing_protocols.bgp.ipv6_networks %}
-	 network {{ route.prefix }}
+      network {{ route.prefix }}
    {% endfor %}
 
