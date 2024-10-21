@@ -78,26 +78,28 @@ router ospfv3
    address-family ipv6
       redistribute bgp
 
+{% if device.routing_protocols.bgp.as %}
 router bgp {{ device.routing_protocols.bgp.as }}
-{% for neighbor in device.routing_protocols.bgp.neighbors %}
-   neighbor {{ neighbor.ip }} remote-as {{ neighbor.remote_as }}
-{% endfor %}
-   redistribute connected
-   redistribute ospf
-   redistribute ospfv3
-   !
-   address-family ipv4
-   {% if device.routing_protocols.bgp.networks %}
-   {% for network in device.routing_protocols.bgp.networks %}
-      network {{ network }}
-   {% endfor %}
-   {% else %}
-      network
-   {% endif %}
+    {% for neighbor in device.routing_protocols.bgp.neighbors %}
+     neighbor {{ neighbor.ip }} remote-as {{ neighbor.remote_as }}
+    {% endfor %}
+     redistribute connected
+     redistribute ospf
+     redistribute ospfv3
+    !
+     address-family ipv4
+     {% if device.routing_protocols.bgp.networks %}
+        {% for network in device.routing_protocols.bgp.networks %}
+           network {{ network }}
+        {% endfor %}
+     {% endif %}
    !
    address-family ipv6
-   {% for neighbor in device.routing_protocols.bgp.neighbors %}
-      {% if '::' in neighbor.ip %} 
+   {% if device.routing_protocols.bgp.neighbors %}
+      {% for neighbor in device.routing_protocols.bgp.neighbors %}
+        {% if '::' in neighbor.ip %} 
          neighbor {{ neighbor.ip }} activate
-      {% endif %}
-   {% endfor %}
+        {% endif %}
+      {% endfor %}   
+   {% endif %}
+{% endif %}

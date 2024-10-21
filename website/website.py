@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
-import yaml  # Ensure PyYAML is installed
+import subprocess
+import yaml
 
 app = Flask(__name__)
 
@@ -91,7 +92,7 @@ def add_device():
                     }
                 }
             }
-            filename = f"/home/student/git/csci5840/template-generator/{device['name']}_access.yaml"
+            filename = f"/home/student/git/csci5840/template-generator/generated-configs/{device['name']}_access.yaml"
 
         elif router_type == 'Core':
             # Core router details
@@ -166,12 +167,17 @@ def add_device():
                     }
                 }
             }
-            filename = f"/home/student/git/csci5840/template-generator/{device['name']}_core.yaml"
+            filename = f"/home/student/git/csci5840/template-generator/generated-configs/{device['name']}_core.yaml"
 
         # Generate and save the YAML file
         yaml_data = yaml.dump({'device': device}, sort_keys=False)
         with open(filename, 'w') as file:
             file.write(yaml_data)
+        
+        # Push to Github
+        subprocess.run(["git", "add", "."], cwd="/home/student/git/csci5840")
+        subprocess.run(["git", "commit", "-m", f"Added {device['name']} configuration"], cwd="/home/student/git/csci5840")
+        subprocess.run(["git", "push"], cwd="/home/student/git/csci5840")
 
         # Redirect to home or success page
         return redirect(url_for('index'))

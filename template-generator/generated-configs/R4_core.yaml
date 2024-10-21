@@ -1,0 +1,38 @@
+device:
+  name: R4
+  vlans:
+  - id: '10'
+    name: Test
+    ipv4_subnet: 10.0.0.1/24
+    ipv6_subnet: 2001::6/64
+    ospfv3:
+      area: 0.0.0.0
+  interfaces:
+  - name: Ethernet1
+    ipv4: 20.0.0.1/24
+    ipv6: null
+    switchport_mode: null
+    ospfv3_area: null
+  routes:
+    static:
+    - prefix: 0.0.0.0/0
+      next_hop: 172.20.20.1
+    ipv6_static:
+    - prefix: null
+      next_hop: null
+  routing_protocols:
+    ospf:
+      id: null
+      networks:
+      - prefix: 10.0.0.0/24
+        area: 0.0.0.0
+    ospfv3:
+      address_family: ipv6
+      redistribute_bgp: 'true'
+    bgp:
+      as: null
+      neighbors:
+      - ip: null
+        remote_as: null
+      networks:
+      - null
