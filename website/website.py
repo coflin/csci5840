@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 import requests
 import subprocess
+import time
 import yaml
 
 app = Flask(__name__)
@@ -183,7 +184,7 @@ def add_device():
         subprocess.run(["git", "add", "."], cwd="/home/student/git/csci5840")
         subprocess.run(["git", "commit", "-m", f"Added {device['name']} configuration"], cwd="/home/student/git/csci5840")
         subprocess.run(["git", "push"], cwd="/home/student/git/csci5840")
-
+        time.sleep(20)
         return jsonify({"status": "File saved, pushed to Github and Jenkins triggered."})
 
         # Redirect to home or success page
