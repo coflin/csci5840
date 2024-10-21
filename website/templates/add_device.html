@@ -526,6 +526,8 @@
 </div>
 
             <button type="submit" class="btn btn-success">Submit</button>
+	    <button id="pushConfigBtn" class="btn btn-success" disabled>Push Config</button>
+	    <p id="jenkinsStatus"></p>
 	</form>
         </div>
     </div>
@@ -539,8 +541,55 @@
         const routerType = document.getElementById('routerType').value;
         document.getElementById('accessForm').style.display = routerType === 'Access' ? 'block' : 'none';
         document.getElementById('coreForm').style.display = routerType === 'Core' ? 'block' : 'none';
-        document.getElementById('edgeForm').style.display = routerType === 'Edge' ? 'block' : 'none';
+        //document.getElementById('edgeForm').style.display = routerType === 'Edge' ? 'block' : 'none';
     }
+
+
+function checkJenkinsStatus() {
+    fetch('/check-jenkins-status')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.status === 'SUCCESS') {
+                document.getElementById('pushConfigBtn').disabled = false;
+                document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
+            } else if (data.status === 'PENDING') {
+                document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
+            } else {
+                document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
+            }
+        })
+        .catch(error => {
+            document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
+        });
+}
+
+// Poll Jenkins every 5 seconds after form submission
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Submit the form data via Fetch API
+        fetch('/add-device', {
+            method: 'POST',
+            body: new FormData(this),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'File saved, pushed to Github and Jenkins triggered.') {
+                // Start checking Jenkins status after the push
+                checkJenkinsStatus();
+            } else {
+                document.getElementById('jenkinsStatus').textContent = "Error pushing config.";
+            }
+        })
+        .catch(error => {
+            document.getElementById('jenkinsStatus').textContent = "Error: " + error.message;
+        });
+    });
 
     // VLAN Functions (class-based)
     document.querySelectorAll('.addVLAN').forEach(button => {

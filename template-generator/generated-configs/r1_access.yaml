@@ -1,10 +1,10 @@
 device:
   name: r1
   vlans:
-  - id: '10'
-    name: Test
-    ipv4_subnet: 10.0.0.1/24
-    ipv6_subnet: 2002::1/64
+  - id: ''
+    name: null
+    ipv4_subnet: null
+    ipv6_subnet: null
     ospfv3:
       area: null
     dhcp_enabled: false
@@ -16,23 +16,23 @@ device:
     ipv4_virtual_router_address: null
     ipv6_virtual_router_address: null
   interfaces:
-  - name: Ethernet1
-    ipv4: 20.0.0.1/24
-    ipv6: 2010::1/64
+  - name: ''
+    ipv4: null
+    ipv6: null
     switchport_mode: null
   routes:
     static:
-    - prefix: 0.0.0.0/0
-      next_hop: 172.20.20.1
+    - prefix: null
+      next_hop: null
     ipv6_static:
     - prefix: null
       next_hop: null
   routing_protocols:
     ospf:
-      id: '1'
+      id: null
       networks:
-      - prefix: 10.0.0.0/24
-        area: 0.0.0.0
+      - prefix: null
+        area: null
     rip:
       networks:
       - prefix: null

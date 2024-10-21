@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+import requests
 import subprocess
 import yaml
 
 app = Flask(__name__)
+
+JENKINS_URL = 'http://localhost:8000/job/Lab%205%20-%20IAC/api/json'
+JENKINS_USER = 'admin'
+JENKINS_PASSWORD = 'admin'
 
 # Route for the main page
 @app.route('/')
@@ -179,10 +184,36 @@ def add_device():
         subprocess.run(["git", "commit", "-m", f"Added {device['name']} configuration"], cwd="/home/student/git/csci5840")
         subprocess.run(["git", "push"], cwd="/home/student/git/csci5840")
 
+        return jsonify({"status": "File saved, pushed to Github and Jenkins triggered."})
+
         # Redirect to home or success page
         return redirect(url_for('index'))
 
     return render_template('add_device.html')
+
+
+@app.route('/check-jenkins-status')
+def check_jenkins_status():
+        try:
+            # Get the Jenkins job data
+            response = requests.get(JENKINS_URL, auth=(JENKINS_USER, JENKINS_PASSWORD))
+            data = response.json()
+
+            # Fetch lastCompletedBuild details
+            if 'lastCompletedBuild' in data:
+                last_build_url = data['lastCompletedBuild']['url'] + 'api/json'
+                build_response = requests.get(last_build_url, auth=(JENKINS_USER, JENKINS_PASSWORD))
+                build_data = build_response.json()
+
+                # Check the result of the last completed build
+                if build_data.get('result') == 'SUCCESS':
+                    return jsonify({"status": "SUCCESS"})
+                else:
+                    return jsonify({"status": "PENDING"})
+            else:
+                return jsonify({"status": "PENDING"})
+        except Exception as e:
+            return jsonify({"status": "ERROR", "message": str(e)})
 
 
 if __name__ == '__main__':
