@@ -580,9 +580,15 @@ function checkJenkinsStatus() {
         .then(response => response.json())
         .then(data => {
             if (data.status === 'File saved, pushed to Github and Jenkins triggered.') {
-                // Start checking Jenkins status after the push
+		// Wait for 5 seconds before checking Jenkins status
+                setTimeout(() => {
+                    checkJenkinsStatus();
+                }, 5000);
+		
+		// Start checking Jenkins status after the push
                 checkJenkinsStatus();
-            } else {
+            
+		} else {
                 document.getElementById('jenkinsStatus').textContent = "Error pushing config.";
             }
         })

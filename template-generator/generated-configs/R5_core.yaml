@@ -1,5 +1,5 @@
 device:
-  name: r1
+  name: R5
   vlans:
   - id: ''
     name: null
