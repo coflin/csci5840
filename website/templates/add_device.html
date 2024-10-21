@@ -545,7 +545,7 @@
     }
 
 
-function checkJenkinsStatus() {
+/* function checkJenkinsStatus() {
     fetch('/check-jenkins-status')
         .then(response => {
             if (!response.ok) {
@@ -566,7 +566,37 @@ function checkJenkinsStatus() {
         .catch(error => {
             document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
         });
+} */
+
+function checkJenkinsStatus() {
+    setTimeout(() => {
+        const interval = setInterval(() => {
+            fetch('/check-jenkins-status')
+                .then(response => response.json())
+                .then(data => {
+                    const lastBuildUrl = data.lastCompletedBuild.url + 'api/json';
+                    return fetch(lastBuildUrl); // Fetch the actual build result
+                })
+                .then(response => response.json())
+                .then(buildData => {
+                    if (buildData.result === 'SUCCESS') {
+                        document.getElementById('pushConfigBtn').disabled = false;
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
+                        clearInterval(interval);  // Stop polling after success
+                    } else if (buildData.result === 'FAILURE') {
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
+                        clearInterval(interval);  // Stop polling after failure
+                    } else {
+                        document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
+                });
+        }, 5000);
+    }, 30000);
 }
+
 
 // Poll Jenkins every 5 seconds after form submission
     document.querySelector('form').addEventListener('submit', function (e) {

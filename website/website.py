@@ -185,7 +185,6 @@ def add_device():
         subprocess.run(["git", "commit", "-m", f"Added {device['name']} configuration"], cwd="/home/student/git/csci5840")
         subprocess.run(["git", "push"], cwd="/home/student/git/csci5840")
         
-        time.sleep(30)
         return jsonify({"status": "File saved, pushed to Github and Jenkins triggered."})
 
         # Redirect to home or success page
