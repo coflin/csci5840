@@ -589,7 +589,7 @@ function checkJenkinsStatus() {
                     document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
                 });
         }, 5000); // Check Jenkins every 5 seconds
-    }, 15000); // Start checking after 30 seconds
+    }, 10000); // Start checking after 30 seconds
 }
 
 // Poll Jenkins every 5 seconds after form submission
