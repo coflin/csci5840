@@ -75,7 +75,7 @@ def main():
                 updatePasswordFile('/home/student/git/csci5840/scripts/sshInfo.csv', info["IP"], new_password)
         
         logger.info("\nWaiting 1 hour before the next update...\n")
-        time.sleep(3600)  # Wait for 10 seconds before the next iteration
+        time.sleep(5)  # Wait for 10 seconds before the next iteration
 
 if __name__ == "__main__":
     main()
