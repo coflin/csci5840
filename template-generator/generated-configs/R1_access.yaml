@@ -1,9 +1,9 @@
 device:
   name: R1
   vlans:
-  - id: '1'
-    name: Test
-    ipv4_subnet: 10.0.0.1/24
+  - id: ''
+    name: null
+    ipv4_subnet: null
     ipv6_subnet: null
     ospfv3:
       area: null
