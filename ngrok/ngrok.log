@@ -109,3 +109,4 @@ t=2024-10-28T16:51:06-0600 lvl=info msg="join connections" obj=join id=4b1df02a0
 t=2024-10-28T16:52:04-0600 lvl=info msg="join connections" obj=join id=2260eb2355a2 l=127.0.0.1:8000 r=140.82.115.84:61810
 t=2024-10-28T16:52:32-0600 lvl=info msg="join connections" obj=join id=ec64f34fd931 l=127.0.0.1:8000 r=140.82.115.89:41678
 t=2024-10-28T16:55:21-0600 lvl=info msg="join connections" obj=join id=1f19906f68b3 l=127.0.0.1:8000 r=140.82.115.124:28472
+t=2024-10-28T16:56:07-0600 lvl=info msg="join connections" obj=join id=d39f8153b74e l=127.0.0.1:8000 r=140.82.115.8:25512
