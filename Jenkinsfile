@@ -31,28 +31,24 @@ pipeline {
                     // Identify the latest YAML file in the generated-configs directory
                     def yamlFile = sh(script: "ls -t /home/student/git/csci5840/template-generator/generated-configs/*.yaml | head -n 1", returnStdout: true).trim()
                     
-                    // Check if we found a YAML file
-                    if (yamlFile) {
-                        def yamlContent = readYaml file: yamlFile
-                        def deviceName = yamlContent?.device?.name
+                    // Extract device name directly with grep (assuming "name" field in YAML structure)
+                    def deviceName = sh(script: "grep '^  name:' ${yamlFile} | awk '{print $2}'", returnStdout: true).trim()
 
-                        if (deviceName) {
-                            // Run ping command and check if it succeeds
-                            def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
-                            if (result != 0) {
-                                error("Ping test failed for device: ${deviceName}")
-                            } else {
-                                echo "Ping test successful for device: ${deviceName}"
-                            }
+                    if (deviceName) {
+                        // Run ping command and check if it succeeds
+                        def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
+                        if (result != 0) {
+                            error("Ping test failed for device: ${deviceName}")
                         } else {
-                            echo "Device name not found in YAML file."
+                            echo "Ping test successful for device: ${deviceName}"
                         }
                     } else {
-                        error("No YAML file found in generated-configs directory.")
+                        echo "Device name not found in YAML file."
                     }
                 }
             }
         }
+
     }
 
     post {
