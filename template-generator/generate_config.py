@@ -18,7 +18,7 @@ with open(f"{args.config}") as file:
     yaml_data = yaml.safe_load(file)
 
 # Set up the Jinja2 environment and load the template based on device type
-env = Environment(loader=FileSystemLoader('templates'))
+env = Environment(loader=FileSystemLoader('/home/student/git/csci5840/template-generator/templates'))
 template = env.get_template(f'{device_type}.j2')
 
 # Render the template with the YAML data
