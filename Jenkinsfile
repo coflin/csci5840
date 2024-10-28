@@ -57,10 +57,10 @@ pipeline {
 
     post {
         success {
-            echo 'Linting successful! No Jinja2 syntax errors found.'
+            echo 'Jenkins Job successful. No errors found!'
         }
         failure {
-            echo 'Linting failed! Jinja2 syntax errors detected.'
+            echo 'Jenkins Job failed. Please check the errors!'
         }
     }
 }
