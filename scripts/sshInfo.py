@@ -5,7 +5,7 @@ import csv
 
 def sshInfo():
     try:
-        csv_file = "sshInfo.csv"
+        csv_file = "/home/student/git/csci5840/scripts/sshInfo.csv"
         data = {}
 
         with open(csv_file, "r") as file:
