@@ -1,5 +1,5 @@
 device:
-  name: r9
+  name: r1
   vlans:
   - id: ''
     name: null
@@ -7,12 +7,19 @@ device:
     ipv6_subnet: null
     ospfv3:
       area: null
+    dhcp_enabled: false
+    dhcp_range_start: null
+    dhcp_range_end: null
+    default_gateway: null
+    dhcpv6_range_start: null
+    dhcpv6_range_end: null
+    ipv4_virtual_router_address: null
+    ipv6_virtual_router_address: null
   interfaces:
   - name: ''
     ipv4: null
     ipv6: null
     switchport_mode: null
-    ospfv3_area: null
   routes:
     static:
     - prefix: null
@@ -26,13 +33,6 @@ device:
       networks:
       - prefix: null
         area: null
-    ospfv3:
-      address_family: ipv6
-      redistribute_bgp: 'true'
-    bgp:
-      as: null
-      neighbors:
-      - ip: null
-        remote_as: null
+    rip:
       networks:
-      - null
+      - prefix: null
