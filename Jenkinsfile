@@ -24,7 +24,6 @@ pipeline {
                 '''
             }
         }
-    }
 
         stage('Ping Test') {
             steps {
@@ -44,6 +43,7 @@ pipeline {
                 }
             }
         }
+    }
 
     post {
         success {
