@@ -31,9 +31,9 @@ pipeline {
                     // Identify the latest YAML file in the generated-configs directory
                     def yamlFile = sh(script: "ls -t /home/student/git/csci5840/template-generator/generated-configs/*.yaml | head -n 1", returnStdout: true).trim()
                     
-                    // Extract device name directly with grep (assuming "name" field in YAML structure)
-                    def deviceName = sh(script: 'grep "^  name:" ' + yamlFile + ' | awk \'{print $2}\'', returnStdout: true).trim()
-                    
+                    // Extract the device name by splitting the filename (e.g., "r3_core.yaml" -> "r3")
+                    def deviceName = yamlFile.split('/').last().split('_')[0]
+
                     if (deviceName) {
                         // Run ping command and check if it succeeds
                         def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
@@ -43,12 +43,11 @@ pipeline {
                             echo "Ping test successful for device: ${deviceName}"
                         }
                     } else {
-                        echo "Device name not found in YAML file."
+                        echo "Device name could not be determined from the file name."
                     }
                 }
             }
         }
-
     }
 
     post {
