@@ -243,12 +243,10 @@ def push_config():
 
         # Step 2: Retrieve SSH details for the device from sshInfo.csv
         ssh_data = sshInfo()
-        print(ssh_data)
         if device_name not in ssh_data:
             return jsonify({"status": "error", "message": f"No SSH info found for device {device_name}"}), 404
         
         device_details = ssh_data[device_name]
-        print(device_details)
         ip_address = device_details["IP"]
         username = device_details["Username"]
         password = device_details["Password"]
@@ -264,6 +262,8 @@ def push_config():
 
         # Step 4: Use Netmiko to connect to the device and send the configuration
         with ConnectHandler(**device) as net_connect:
+            net_connect.enable()
+            net_connect.config_mode()
             output = net_connect.send_config_from_file(cfg_path)
             print(output)
 
