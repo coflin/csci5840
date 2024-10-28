@@ -5,6 +5,10 @@ import time
 import yaml
 import os
 from netmiko import ConnectHandler
+import sys
+# Path to the directory containing sshInfo.py
+sys.path.append("/home/student/git/csci5840/scripts")
+from sshInfo import sshInfo  # Now we can import sshInfo
 
 app = Flask(__name__)
 
@@ -237,27 +241,31 @@ def push_config():
         cfg_file = f"{device_name}.cfg"
         cfg_path = os.path.join(GENERATED_CONFIGS_DIR, cfg_file)
 
-        # Get IP address using 'host <device_name>' command
-        try:
-            result = subprocess.run(["host", device_name], capture_output=True, text=True)
-            ip_address = result.stdout.split()[3]  # Extract the IP from the command output
-        except subprocess.CalledProcessError as e:
-            return jsonify({"status": "error", "message": f"Failed to resolve IP for {device_name}: {str(e)}"}), 500
+        # Step 2: Retrieve SSH details for the device from sshInfo.csv
+        ssh_data = sshInfo()
+        if device_name not in ssh_data:
+            return jsonify({"status": "error", "message": f"No SSH info found for device {device_name}"}), 404
+        
+        device_details = ssh_data[device_name]
+        ip_address = device_details["IP"]
+        username = device_details["Username"]
+        password = device_details["Password"]
+        device_type = device_details["Device_Type"]
 
-        # Step 2: Define the Netmiko device configuration with the resolved IP address
+        # Step 3: Define the Netmiko device configuration using the SSH details
         device = {
-            'device_type': 'arista_eos',  # Replace with your device type
+            'device_type': device_type,
             'host': ip_address,
-            'username': 'admin',  # Replace with actual username
-            'password': 'admin',  # Replace with actual password
+            'username': username,
+            'password': password,
         }
 
-        # Step 3: Use Netmiko to connect to the device and send the configuration
+        # Step 4: Use Netmiko to connect to the device and send the configuration
         with ConnectHandler(**device) as net_connect:
             output = net_connect.send_config_from_file(cfg_path)
             print(output)
 
-        # Step 4: Clean up by deleting the .cfg and .yaml files
+        # Step 5: Clean up by deleting the .cfg and .yaml files
         os.remove(cfg_path)
         os.remove(config_file_path)
 
