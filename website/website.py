@@ -239,10 +239,10 @@ def push_config():
 
         # Step 2: Define the Netmiko device configuration
         device = {
-            'device_type': 'cisco_ios',  # Replace with your device type (e.g., 'arista_eos' for Arista)
+            'device_type': 'arista_eos',  # Replace with your device type (e.g., 'arista_eos' for Arista)
             'host': device_name,  # Replace with the actual IP or hostname of the device
-            'username': 'your_username',  # Replace with the actual username
-            'password': 'your_password',  # Replace with the actual password
+            'username': 'admin',  # Replace with the actual username
+            'password': 'admin',  # Replace with the actual password
         }
 
         # Step 3: Use Netmiko to connect to the device and send the configuration
