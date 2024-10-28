@@ -237,12 +237,19 @@ def push_config():
         cfg_file = f"{device_name}.cfg"
         cfg_path = os.path.join(GENERATED_CONFIGS_DIR, cfg_file)
 
-        # Step 2: Define the Netmiko device configuration
+        # Get IP address using 'host <device_name>' command
+        try:
+            result = subprocess.run(["host", device_name], capture_output=True, text=True, check=True)
+            ip_address = result.stdout.split()[-1]  # Extract the IP from the command output
+        except subprocess.CalledProcessError as e:
+            return jsonify({"status": "error", "message": f"Failed to resolve IP for {device_name}: {str(e)}"}), 500
+
+        # Step 2: Define the Netmiko device configuration with the resolved IP address
         device = {
-            'device_type': 'arista_eos',  # Replace with your device type (e.g., 'arista_eos' for Arista)
-            'host': device_name,  # Replace with the actual IP or hostname of the device
-            'username': 'admin',  # Replace with the actual username
-            'password': 'admin',  # Replace with the actual password
+            'device_type': 'arista_eos',  # Replace with your device type
+            'host': ip_address,
+            'username': 'admin',  # Replace with actual username
+            'password': 'admin',  # Replace with actual password
         }
 
         # Step 3: Use Netmiko to connect to the device and send the configuration
@@ -261,7 +268,7 @@ def push_config():
         return jsonify({"status": "error", "message": "File not found: " + str(e)}), 404
     except Exception as e:
         return jsonify({"status": "error", "message": f"Failed to push config: {str(e)}"}), 500
-
+        
 if __name__ == '__main__':
     app.run(debug=True)
 
