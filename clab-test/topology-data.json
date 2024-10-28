@@ -1,0 +1,97 @@
+{
+  "name": "test",
+  "type": "clab",
+  "clab": {
+    "config": {
+      "prefix": "clab",
+      "mgmt": {
+        "network": "clab",
+        "bridge": "br-5257aa97fb39",
+        "ipv4-subnet": "172.20.20.0/24",
+        "ipv4-gw": "172.20.20.1",
+        "ipv6-subnet": "2001:172:20:20::/64",
+        "ipv6-gw": "2001:172:20:20::1",
+        "mtu": 1500,
+        "external-access": true
+      }
+    }
+  },
+  "nodes": {
+    "r8": {
+      "index": "0",
+      "shortname": "r8",
+      "longname": "clab-test-r8",
+      "fqdn": "r8.test.io",
+      "group": "",
+      "labdir": "/home/student/git/csci5840/clab-test/r8",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.8",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::8",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:e7:71:c6",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5257aa97fb39",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/csci5840/clab-test/r8",
+        "clab-node-name": "r8",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/csci5840/test.yaml",
+        "containerlab": "test"
+      },
+      "port-bindings": [
+      ]
+    },
+    "r9": {
+      "index": "1",
+      "shortname": "r9",
+      "longname": "clab-test-r9",
+      "fqdn": "r9.test.io",
+      "group": "",
+      "labdir": "/home/student/git/csci5840/clab-test/r9",
+      "kind": "arista_ceos",
+      "image": "ceos:4.32.0F",
+      "mgmt-net": "",
+      "mgmt-intf": "Management0",
+      "mgmt-ipv4-address": "172.20.20.7",
+      "mgmt-ipv4-prefix-length": 24,
+      "mgmt-ipv6-address": "2001:172:20:20::7",
+      "mgmt-ipv6-prefix-length": 64,
+      "mac-address": "00:1c:73:89:53:c3",
+      "labels": {
+        "clab-mgmt-net-bridge": "br-5257aa97fb39",
+        "clab-node-group": "",
+        "clab-node-kind": "arista_ceos",
+        "clab-node-lab-dir": "/home/student/git/csci5840/clab-test/r9",
+        "clab-node-name": "r9",
+        "clab-node-type": "",
+        "clab-owner": "student",
+        "clab-topo-file": "/home/student/git/csci5840/test.yaml",
+        "containerlab": "test"
+      },
+      "port-bindings": [
+      ]
+    }
+  },
+  "links": [
+    {
+      "a": {
+        "node": "r8",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:bd:69:05",
+        "peer": "z"
+      },
+      "z": {
+        "node": "r9",
+        "interface": "eth1",
+        "mac": "aa:c1:ab:bd:1d:34",
+        "peer": "a"
+      }
+    }
+  ]
+}

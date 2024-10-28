@@ -1,3 +1,4 @@
+#! /usr/bin/python3
 from art import text2art
 import re
 import csv

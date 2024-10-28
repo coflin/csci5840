@@ -26,6 +26,26 @@ pipeline {
         }
     }
 
+        stage('Ping Test') {
+            steps {
+                script {
+                    def deviceName = params.DEVICE_NAME
+                    if (deviceName) {
+                        // Run ping command, check if it succeeds
+                        def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
+                        if (result != 0) {
+                            error("Ping test failed for device: ${deviceName}")
+                        } else {
+                            echo "Ping test successful for device: ${deviceName}"
+                        }
+                    } else {
+                        echo "No device name provided for ping test."
+                    }
+                }
+            }
+        }
+    }
+
     post {
         success {
             echo 'Linting successful! No Jinja2 syntax errors found.'

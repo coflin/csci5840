@@ -29,3 +29,9 @@ t=2024-10-20T04:52:15-0600 lvl=info msg="update available" obj=updater
 t=2024-10-20T10:52:15-0600 lvl=info msg="update available" obj=updater
 t=2024-10-20T12:31:20-0600 lvl=info msg="join connections" obj=join id=de2595d8b83b l=127.0.0.1:8000 r=140.82.115.94:51368
 t=2024-10-20T12:32:29-0600 lvl=info msg="join connections" obj=join id=25d4aba5c8bb l=127.0.0.1:8000 r=140.82.115.34:38660
+t=2024-10-28T12:14:29-0600 lvl=info msg="open config file" path=/home/student/git/csci5840/ngrok/config.yml err=nil
+t=2024-10-28T12:14:30-0600 lvl=info msg="starting web service" obj=web addr=127.0.0.1:4040 allow_hosts=[]
+t=2024-10-28T12:14:30-0600 lvl=info msg="client session established" obj=tunnels.session
+t=2024-10-28T12:14:30-0600 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2024-10-28T12:14:30-0600 lvl=info msg="started tunnel" obj=tunnels name=jenkins addr=http://localhost:8000 url=https://750b-128-138-64-27.ngrok-free.app
+t=2024-10-28T12:14:30-0600 lvl=info msg="update available" obj=updater
