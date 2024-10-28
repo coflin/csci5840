@@ -28,17 +28,27 @@ pipeline {
         stage('Ping Test') {
             steps {
                 script {
-                    def deviceName = params.DEVICE_NAME
-                    if (deviceName) {
-                        // Run ping command, check if it succeeds
-                        def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
-                        if (result != 0) {
-                            error("Ping test failed for device: ${deviceName}")
+                    // Identify the latest YAML file in the generated-configs directory
+                    def yamlFile = sh(script: "ls -t /home/student/git/csci5840/template-generator/generated-configs/*.yaml | head -n 1", returnStdout: true).trim()
+                    
+                    // Check if we found a YAML file
+                    if (yamlFile) {
+                        def yamlContent = readYaml file: yamlFile
+                        def deviceName = yamlContent?.device?.name
+
+                        if (deviceName) {
+                            // Run ping command and check if it succeeds
+                            def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
+                            if (result != 0) {
+                                error("Ping test failed for device: ${deviceName}")
+                            } else {
+                                echo "Ping test successful for device: ${deviceName}"
+                            }
                         } else {
-                            echo "Ping test successful for device: ${deviceName}"
+                            echo "Device name not found in YAML file."
                         }
                     } else {
-                        echo "No device name provided for ping test."
+                        error("No YAML file found in generated-configs directory.")
                     }
                 }
             }
