@@ -14,7 +14,7 @@ filename = os.path.splitext(args.config)[0]
 device_name, device_type = filename.split('_', 1)
 
 # Load YAML data
-with open(f"generated-configs/{args.config}") as file:
+with open(f"{args.config}") as file:
     yaml_data = yaml.safe_load(file)
 
 # Set up the Jinja2 environment and load the template based on device type
@@ -25,7 +25,7 @@ template = env.get_template(f'{device_type}.j2')
 config_output = template.render(yaml_data)
 
 # Save the configuration to a .cfg file in the generated-configs directory
-output_file_path = f"generated-configs/{device_name}.cfg"
+output_file_path = f"{device_name}.cfg"
 with open(output_file_path, 'w') as cfg_file:
     cfg_file.write(config_output)
     
