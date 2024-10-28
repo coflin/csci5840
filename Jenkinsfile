@@ -32,8 +32,8 @@ pipeline {
                     def yamlFile = sh(script: "ls -t /home/student/git/csci5840/template-generator/generated-configs/*.yaml | head -n 1", returnStdout: true).trim()
                     
                     // Extract device name directly with grep (assuming "name" field in YAML structure)
-                    def deviceName = sh(script: "grep '^  name:' ${yamlFile} | awk '{print $2}'", returnStdout: true).trim()
-
+                    def deviceName = sh(script: 'grep "^  name:" ' + yamlFile + ' | awk \'{print $2}\'', returnStdout: true).trim()
+                    
                     if (deviceName) {
                         // Run ping command and check if it succeeds
                         def result = sh(script: "ping -c 4 ${deviceName}", returnStatus: true)
