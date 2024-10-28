@@ -240,6 +240,7 @@ def push_config():
         # Get IP address using 'host <device_name>' command
         try:
             result = subprocess.run(["host", device_name], capture_output=True, text=True, check=True)
+            return jsonify({result})
             ip_address = result.stdout.split()[-1]  # Extract the IP from the command output
         except subprocess.CalledProcessError as e:
             return jsonify({"status": "error", "message": f"Failed to resolve IP for {device_name}: {str(e)}"}), 500
@@ -268,7 +269,7 @@ def push_config():
         return jsonify({"status": "error", "message": "File not found: " + str(e)}), 404
     except Exception as e:
         return jsonify({"status": "error", "message": f"Failed to push config: {str(e)}"}), 500
-        
+
 if __name__ == '__main__':
     app.run(debug=True)
 
