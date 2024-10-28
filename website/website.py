@@ -239,9 +239,8 @@ def push_config():
 
         # Get IP address using 'host <device_name>' command
         try:
-            result = subprocess.run(["host", device_name], capture_output=True, text=True, check=True)
-            return jsonify({result})
-            ip_address = result.stdout.split()[-1]  # Extract the IP from the command output
+            result = subprocess.run(["host", device_name], capture_output=True, text=True)
+            ip_address = result.stdout.split()[3]  # Extract the IP from the command output
         except subprocess.CalledProcessError as e:
             return jsonify({"status": "error", "message": f"Failed to resolve IP for {device_name}: {str(e)}"}), 500
 
