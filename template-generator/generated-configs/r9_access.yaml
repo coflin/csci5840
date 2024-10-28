@@ -1,0 +1,38 @@
+device:
+  name: r9
+  vlans:
+  - id: ''
+    name: null
+    ipv4_subnet: null
+    ipv6_subnet: null
+    ospfv3:
+      area: null
+    dhcp_enabled: false
+    dhcp_range_start: null
+    dhcp_range_end: null
+    default_gateway: null
+    dhcpv6_range_start: null
+    dhcpv6_range_end: null
+    ipv4_virtual_router_address: null
+    ipv6_virtual_router_address: null
+  interfaces:
+  - name: ''
+    ipv4: null
+    ipv6: null
+    switchport_mode: null
+  routes:
+    static:
+    - prefix: null
+      next_hop: null
+    ipv6_static:
+    - prefix: null
+      next_hop: null
+  routing_protocols:
+    ospf:
+      id: null
+      networks:
+      - prefix: null
+        area: null
+    rip:
+      networks:
+      - prefix: null

@@ -4,17 +4,19 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Generate router configuration from YAML file.')
 parser.add_argument('--config', required=True, help='Path to the YAML file.')
-parser.add_argument('--type', required=True, choices=['access', 'core', 'edge'], help='Type of the router (access, core, edge).')
 
 args = parser.parse_args()
 
-with open(args.config) as file:
+device_type = args.config.split('_')[1].split('.')[0]
+
+with open(f"generated-configs/{args.config}") as file:
     yaml_data = yaml.safe_load(file)
 
+
 env = Environment(loader=FileSystemLoader('templates'))
-template = env.get_template(f'{args.type}.j2')
+template = env.get_template(f'{device_type}.j2')
 
 config_output = template.render(yaml_data)
 
-print(config_output)
+#print(config_output)
 
