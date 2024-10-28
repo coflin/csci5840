@@ -526,7 +526,7 @@
 </div>
 
             <button type="submit" class="btn btn-success">Submit</button>
-	    <button id="pushConfigBtn" class="btn btn-success" disabled>Push Config</button>
+	    <button id="pushConfigBtn" class="btn btn-success" onclick="pushConfig()" disabled>Push Config</button>
 	    <p id="jenkinsStatus"></p>
 	</form>
         </div>
@@ -545,28 +545,27 @@
     }
 
 
-/* function checkJenkinsStatus() {
-    fetch('/check-jenkins-status')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            if (data.status === 'SUCCESS') {
-                document.getElementById('pushConfigBtn').disabled = false;
-                document.getElementById('jenkinsStatus').textContent = "Jenkins Job Successful!";
-            } else if (data.status === 'PENDING') {
-                document.getElementById('jenkinsStatus').textContent = "Jenkins Job is still running...";
-            } else {
-                document.getElementById('jenkinsStatus').textContent = "Jenkins Job Failed!";
-            }
-        })
-        .catch(error => {
-            document.getElementById('jenkinsStatus').textContent = 'Error fetching Jenkins status: ' + error;
-        });
-} */
+    function pushConfig() {
+    // Construct the YAML file name based on user input
+    const configFile = document.getElementById('deviceName').value + '_' + document.getElementById('routerType').value.toLowerCase() + '.yaml';
+
+    fetch('/push-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ config_file: configFile })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            document.getElementById('jenkinsStatus').innerHTML = `<span style='color: green;'>${data.message}</span>`;
+        } else {
+            document.getElementById('jenkinsStatus').innerHTML = `<span style='color: red;'>${data.message}</span>`;
+        }
+    })
+    .catch(error => {
+        document.getElementById('jenkinsStatus').textContent = "Error: " + error.message;
+    });
+}
 
 function checkJenkinsStatus() {
     setTimeout(() => {

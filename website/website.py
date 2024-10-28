@@ -216,6 +216,46 @@ def check_jenkins_status():
         except Exception as e:
             return jsonify({"status": "ERROR", "message": str(e)})
 
+@app.route('/push-config', methods=['POST'])
+def push_config():
+    config_file = request.json.get('config_file')
+    if not config_file:
+        return jsonify({"status": "error", "message": "No config file specified"}), 400
+
+    try:
+        # Step 1: Run generate_config.py to create the .cfg file
+        subprocess.run(["python3", "generate_config.py", "--config", config_file], check=True)
+
+        # Determine the paths for the .yaml and .cfg files
+        device_name = config_file.split('_')[0]
+        cfg_file = f"{device_name}.cfg"
+        cfg_path = os.path.join("generated-configs", cfg_file)
+        yaml_path = os.path.join("generated-configs", config_file)
+
+        # Step 2: Define the Netmiko device configuration
+        device = {
+            'device_type': 'arista_eos',
+            'host': device_name,
+            'username': 'admin',
+            'password': 'admin',
+        }
+
+        # Step 3: Use Netmiko to connect to the device and send the configuration
+        with ConnectHandler(**device) as net_connect:
+            output = net_connect.send_config_from_file(cfg_path)
+            print(output)
+
+        # Step 4: Clean up by deleting the .cfg and .yaml files
+        os.remove(cfg_path)
+        os.remove(yaml_path)
+
+        return jsonify({"status": "success", "message": f"{cfg_file} pushed and cleaned up successfully."})
+    except subprocess.CalledProcessError as e:
+        return jsonify({"status": "error", "message": f"Error running generate_config.py: {str(e)}"}), 500
+    except FileNotFoundError as e:
+        return jsonify({"status": "error", "message": "File not found: " + str(e)}), 404
+    except Exception as e:
+        return jsonify({"status": "error", "message": f"Failed to push config: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
