@@ -25,6 +25,21 @@ pipeline {
             }
         }
 
+        stage('Verify Generated Config Exists') {
+            steps {
+                script {
+                    // Check if there is at least one file in the generated-configs directory
+                    def fileExists = sh(script: "ls /home/student/git/csci5840/template-generator/generated-configs/*.yaml 2>/dev/null || echo 'not found'", returnStdout: true).trim()
+
+                    if (fileExists == 'not found') {
+                        error("No configuration file found in template-generator/generated-configs directory.")
+                    } else {
+                        echo "Configuration file exists: ${fileExists}"
+                    }
+                }
+            }
+        }
+
         stage('Ping Test') {
             steps {
                 script {
@@ -43,7 +58,7 @@ pipeline {
                             echo "Ping test successful for device: ${deviceName}"
                         }
                     } else {
-                        echo "Device name could not be determined from the file name."
+                        error("Device name could not be determined from the file name.")
                     }
                 }
             }
