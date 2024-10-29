@@ -38,7 +38,7 @@ def extract_cpu_usage(cpu_output):
     Extracts 'sy' from the CPU usage output. Format expected:
     %Cpu(s):  3.2 us,  5.6 sy,  0.0 ni, 91.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
     """
-    match = re.search(r'(\d+\.\d+) sy', cpu_output)
+    match = re.search(r'(\d+\.\d+)\s+sy', cpu_output)
     return f"{match.group(1)}%" if match else "[bold red]Unable to extract CPU usage[/bold red]"
 
 def extract_ospf_neighbors(ospf_output):

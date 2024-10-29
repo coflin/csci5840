@@ -1,8 +1,8 @@
 Routers,Device_Type,IP,Username,Password
-r1,arista_eos,192.168.100.2,admin,qqTLNg
-r2,arista_eos,192.168.100.3,admin,pYLgSQ
-r3,arista_eos,192.168.100.4,admin,P7XVlQ
-r4,arista_eos,192.168.100.5,admin,3mopOg
-r5,arista_eos,172.20.20.9,admin,arWoMw
-r8,arista_eos,172.20.20.8,admin,tEopgg
-r9,arista_eos,172.20.20.7,admin,gxsKOw
+r1,arista_eos,192.168.100.2,admin,admin
+r2,arista_eos,192.168.100.3,admin,admin
+r3,arista_eos,192.168.100.4,admin,admin
+r4,arista_eos,192.168.100.5,admin,admin
+r5,arista_eos,172.20.20.4,admin,admin
+r8,arista_eos,172.20.20.7,admin,admin
+r9,arista_eos,172.20.20.8,admin,admin

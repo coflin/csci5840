@@ -12,6 +12,6 @@ all:
         ansible_password: admin
       hosts:
         clab-test-r8:
-          ansible_host: 172.20.20.8
-        clab-test-r9:
           ansible_host: 172.20.20.7
+        clab-test-r9:
+          ansible_host: 172.20.20.8

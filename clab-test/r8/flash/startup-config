@@ -1,9 +1,9 @@
-! Startup-config last modified at Mon Oct 28 18:22:21 2024 by root
+! Startup-config last modified at Tue Oct 29 01:35:42 2024 by root
 ! device: r8 (cEOSLab, EOS-4.32.0F-36401836.4320F (engineering build))
 !
 no aaa root
 !
-username admin privilege 15 role network-admin secret sha512 $6$DmG.8KAsMOzZHdXI$ZpG.2oiPiJ8a4Jfqv9X98Strctwpb7z3AHmQqI8YrB7vJQidsb09CuJrklriVnys9VwsPIHD1Ug05gAdPstaW/
+username admin privilege 15 role network-admin secret sha512 $6$.7fzEEYuewPTBGZg$0qJIPPK5khYAeZ9uGDFUzLpNjm4Qij1LCTYPyd0r4Z37UroyLzuzWlqqwSmL7PtbPWtKdBciaETxbRU7smD3i1
 !
 transceiver qsfp default-mode 4x10G
 !
@@ -29,8 +29,8 @@ management api netconf
 interface Ethernet1
 !
 interface Management0
-   ip address 172.20.20.8/24
-   ipv6 address 2001:172:20:20::8/64
+   ip address 172.20.20.7/24
+   ipv6 address 2001:172:20:20::7/64
 !
 no ip routing
 !
