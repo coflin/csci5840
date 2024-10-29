@@ -63,5 +63,5 @@ class TestDeviceHealthChecks(unittest.TestCase):
 
                 self.assertTrue(len(bgp_output) > 0, "BGP neighbors command returned empty output")
 
-if __name__ == "__main__":
-    unittest.main()
+#if __name__ == "__main__":
+#    unittest.main()
