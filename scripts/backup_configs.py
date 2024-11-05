@@ -21,7 +21,7 @@ if not os.path.exists(save_dir):
 def backup_running_config(ip):
     # Device connection details
     device = {
-        'device_type': 'cisco_ios',  # Adjust this based on your router type
+        'device_type': 'arista_eos',  # Adjust this based on your router type
         'ip': ip,
         'username': username,
         'password': password,

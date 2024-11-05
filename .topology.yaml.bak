@@ -6,8 +6,8 @@ topology:
       image:  ceos:4.32.0F
     linux:
       image:  my-custom-ubuntu
-    linux-webserver:
-      image:  ubuntu-h5
+    arista_veos:
+      image:  /home/student/Downloads/vEOS-lab-4.33.0F.qcow2
   nodes:
     r1:
       kind: arista_ceos
@@ -24,6 +24,10 @@ topology:
     r5:
       kind: arista_ceos
       startup-config: /home/student/git/csci5840/backup-configs/r5.cfg
+    r6:
+      kind: arista_ceos
+    r7:
+      kind: arista_ceos
     s1:
       kind: arista_ceos
       startup-config: /home/student/git/csci5840/backup-configs/s1.cfg
@@ -65,3 +69,5 @@ topology:
     - endpoints:  ["r3:eth1", "r4:eth1"]
     - endpoints:  ["r5:eth3", "webserver:eth3"]
     - endpoints:  ["s3:eth4", "host:eth1"]
+    - endpoints:  ["r4:eth4", "r6:eth1"]
+    - endpoints:  ["r6:eth2", "r7:eth2"]

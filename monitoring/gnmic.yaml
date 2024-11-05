@@ -35,7 +35,7 @@ outputs:
     address: http://localhost:8086
     org: netman
     bucket: lab2-stream
-    token: UU04aDyKLDIm1G-2yApPchkOKCJ7SSlOtie7WBTw3OakIvjk9iF55p4ioZOHWxdvrJODqz4TngIpgzFVgQzivA==
+    token: bN6t7X9Si-fUtdShHEiCr_OUJtvIzSyP5IfSLFQmp7rxNNpnZYZlpAfK_a6wxcPTu2KhvMKhz9iTwB4J5f4SYw==
     override-timestamps:  false
     timestamp-precision:  s
     health-check-period:  30s

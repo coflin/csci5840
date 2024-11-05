@@ -4,5 +4,7 @@ r2,arista_eos,192.168.100.3,admin,admin
 r3,arista_eos,192.168.100.4,admin,admin
 r4,arista_eos,192.168.100.5,admin,admin
 r5,arista_eos,172.20.20.4,admin,admin
+r6,arista_eos,172.20.20.16,admin,admin
+r7,arista_eos,172.20.20.13,admin,admin
 r8,arista_eos,172.20.20.7,admin,admin
 r9,arista_eos,172.20.20.8,admin,admin

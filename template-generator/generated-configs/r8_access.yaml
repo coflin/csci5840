@@ -1,9 +1,9 @@
 device:
   name: r8
   vlans:
-  - id: ''
-    name: null
-    ipv4_subnet: null
+  - id: '10'
+    name: test
+    ipv4_subnet: 10.0.0.1/24
     ipv6_subnet: null
     ospfv3:
       area: null
@@ -16,8 +16,8 @@ device:
     ipv4_virtual_router_address: null
     ipv6_virtual_router_address: null
   interfaces:
-  - name: Ethernet1
-    ipv4: 10.0.0.1/24
+  - name: ''
+    ipv4: null
     ipv6: null
     switchport_mode: null
   routes:
