@@ -4,21 +4,28 @@ import threading
 from netmiko import ConnectHandler
 from loguru import logger
 
-# Device connection details for R6 and R7
+# Device connection details
 devices = {
     "R6": {
         "device_type": "arista_eos",
-        "host": "192.51.0.2",  # IP for R6
+        "host": "192.51.0.2",
         "username": "admin",
         "password": "admin",
-        "config_file": "r6_config.cfg"  # Configuration file for R6
+        "config_file": "/home/student/git/csci5840/ztp/r6_config.cfg"
     },
     "R7": {
         "device_type": "arista_eos",
-        "host": "192.51.0.6",  # IP for R7
+        "host": "192.51.0.6",
         "username": "admin",
         "password": "admin",
-        "config_file": "r7_config.cfg"  # Configuration file for R7
+        "config_file": "/home/student/git/csci5840/ztp/r7_config.cfg"
+    },
+    "R8": {
+        "device_type": "arista_eos",
+        "host": "172.20.20.20",  
+        "username": "admin",
+        "password": "admin",
+        "config_file": "/home/student/git/csci5840/ztp/r8_config.cfg"
     }
 }
 
@@ -35,20 +42,37 @@ def ping_until_reachable(device_name, device_info):
         response = os.system(f"ping -c 1 {ip_address}")
         if response == 0:
             logger.info(f"{ip_address} ({device_name}) is reachable.")
+            if device_name == "R8":
+                setup_r8(device_info)
             push_config(device_info, config_commands)
             break
         else:
             logger.info(f"{ip_address} ({device_name}) is not reachable. Retrying in 3 seconds...")
         time.sleep(3)
 
+def setup_r8(device_info):
+    """Assign IP to eth1 on R8 and check connectivity to 192.51.0.9."""
+    connection = ConnectHandler(**{k: v for k, v in device_info.items() if k != "config_file"})
+    connection.enable()
+    try:
+        # Assign IP to eth1
+        connection.send_config_set([
+            "interface Ethernet1",
+            "no switchport",
+            "ip address 192.51.0.10/30",
+            "no shutdown"
+        ])
+    except Exception as e:
+        logger.error(f"Error on {device_info['host']}: {e}")
+    finally:
+        connection.disconnect()
+
 def push_config(device_info, config_commands):
     """Connect to the device and push configuration commands."""
-    # Remove the `config_file` key before passing to ConnectHandler
     device_connection_info = {k: v for k, v in device_info.items() if k != "config_file"}
     connection = ConnectHandler(**device_connection_info)
     connection.enable()
     try:
-        # Apply configuration from the file
         connection.send_config_set(config_commands)
         connection.save_config()  # Save the configuration to startup-config
         logger.success(f"Configuration applied successfully to {device_info['host']}.")
@@ -70,4 +94,3 @@ for thread in threads:
     thread.join()
 
 logger.success("Configuration process completed for all devices.")
-

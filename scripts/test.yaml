@@ -1,0 +1,11 @@
+anta_inventory:
+  hosts:
+  - host: 192.168.100.2
+    name: r1
+  - host: 192.168.100.3
+    name: r2
+  - host: 192.168.100.4
+    name: r3
+  - host: 192.168.100.5
+    name: r4
+

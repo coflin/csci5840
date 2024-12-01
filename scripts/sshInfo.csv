@@ -3,3 +3,7 @@ r1,arista_eos,192.168.100.2,admin,admin
 r2,arista_eos,192.168.100.3,admin,admin
 r3,arista_eos,192.168.100.4,admin,admin
 r4,arista_eos,192.168.100.5,admin,admin
+r5,arista_eos,172.20.20.22,admin,admin
+r6,arista_eos,172.20.20.2,admin,admin
+r7,arista_eos,172.20.20.21,admin,admin
+r8,arista_eos,172.20.20.20,admin,admin

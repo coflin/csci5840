@@ -248,3 +248,118 @@ t=2024-11-05T16:48:31-0700 lvl=info msg="join connections" obj=join id=db5fc30ed
 t=2024-11-05T16:50:27-0700 lvl=info msg="join connections" obj=join id=29e98f946046 l=127.0.0.1:8000 r=140.82.115.35:41598
 t=2024-11-05T16:51:35-0700 lvl=info msg="join connections" obj=join id=d4e2e9e76d5a l=127.0.0.1:8000 r=140.82.115.42:39956
 t=2024-11-05T16:52:03-0700 lvl=info msg="join connections" obj=join id=11156c8624e9 l=127.0.0.1:8000 r=140.82.115.54:40668
+t=2024-11-05T16:52:53-0700 lvl=info msg="join connections" obj=join id=1dcf5c68c3ef l=127.0.0.1:8000 r=140.82.115.52:53300
+t=2024-11-05T20:00:35-0700 lvl=info msg="update available" obj=updater
+t=2024-11-06T02:00:36-0700 lvl=info msg="update available" obj=updater
+t=2024-11-06T08:00:36-0700 lvl=info msg="update available" obj=updater
+t=2024-11-06T14:00:36-0700 lvl=info msg="update available" obj=updater
+t=2024-11-06T20:00:37-0700 lvl=info msg="update available" obj=updater
+t=2024-11-07T02:00:37-0700 lvl=info msg="update available" obj=updater
+t=2024-11-07T08:00:37-0700 lvl=info msg="update available" obj=updater
+t=2024-11-07T14:00:38-0700 lvl=info msg="update available" obj=updater
+t=2024-11-07T20:00:38-0700 lvl=info msg="update available" obj=updater
+t=2024-11-08T02:00:38-0700 lvl=info msg="update available" obj=updater
+t=2024-11-08T08:00:38-0700 lvl=info msg="update available" obj=updater
+t=2024-11-08T14:00:39-0700 lvl=info msg="update available" obj=updater
+t=2024-11-08T20:00:39-0700 lvl=info msg="update available" obj=updater
+t=2024-11-09T02:00:39-0700 lvl=info msg="update available" obj=updater
+t=2024-11-09T08:00:40-0700 lvl=info msg="update available" obj=updater
+t=2024-11-09T14:00:40-0700 lvl=info msg="update available" obj=updater
+t=2024-11-09T20:00:40-0700 lvl=info msg="update available" obj=updater
+t=2024-11-10T02:00:40-0700 lvl=info msg="update available" obj=updater
+t=2024-11-10T08:00:41-0700 lvl=info msg="update available" obj=updater
+t=2024-11-10T14:00:41-0700 lvl=info msg="update available" obj=updater
+t=2024-11-10T20:00:41-0700 lvl=info msg="update available" obj=updater
+t=2024-11-11T02:00:41-0700 lvl=info msg="update available" obj=updater
+t=2024-11-11T08:00:42-0700 lvl=info msg="update available" obj=updater
+t=2024-11-11T14:00:42-0700 lvl=info msg="update available" obj=updater
+t=2024-11-11T20:00:47-0700 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": context deadline exceeded"
+t=2024-11-12T02:00:47-0700 lvl=info msg="update available" obj=updater
+t=2024-11-12T08:00:48-0700 lvl=info msg="update available" obj=updater
+t=2024-11-12T14:00:48-0700 lvl=info msg="update available" obj=updater
+t=2024-11-12T20:00:48-0700 lvl=info msg="update available" obj=updater
+t=2024-11-13T02:00:49-0700 lvl=info msg="update available" obj=updater
+t=2024-11-13T08:00:49-0700 lvl=info msg="update available" obj=updater
+t=2024-11-13T14:00:49-0700 lvl=info msg="update available" obj=updater
+t=2024-11-13T20:00:50-0700 lvl=info msg="update available" obj=updater
+t=2024-11-14T02:00:50-0700 lvl=info msg="update available" obj=updater
+t=2024-11-14T08:00:50-0700 lvl=info msg="update available" obj=updater
+t=2024-11-14T14:00:50-0700 lvl=info msg="update available" obj=updater
+t=2024-11-14T20:00:51-0700 lvl=info msg="update available" obj=updater
+t=2024-11-15T02:00:51-0700 lvl=info msg="update available" obj=updater
+t=2024-11-15T08:00:51-0700 lvl=info msg="update available" obj=updater
+t=2024-11-15T09:27:13-0700 lvl=eror msg="session closed, starting reconnect loop" obj=tunnels.session obj=csess id=4b7113e198ad err="read EOF from remote peer"
+t=2024-11-15T09:27:14-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-15T09:27:14-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-15T09:27:16-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-15T09:27:18-0700 lvl=info msg="client session established" obj=tunnels.session
+t=2024-11-15T09:27:18-0700 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2024-11-15T09:27:31-0700 lvl=eror msg="heartbeat timeout, terminating session" obj=tunnels.session obj=csess id=2352e0579104 clientid=23b69842e8548a437e1e6e2c8b382d32
+t=2024-11-15T14:00:52-0700 lvl=info msg="update available" obj=updater
+t=2024-11-15T20:00:52-0700 lvl=info msg="update available" obj=updater
+t=2024-11-16T02:00:52-0700 lvl=info msg="update available" obj=updater
+t=2024-11-16T08:00:52-0700 lvl=info msg="update available" obj=updater
+t=2024-11-16T14:00:53-0700 lvl=info msg="update available" obj=updater
+t=2024-11-16T20:00:53-0700 lvl=info msg="update available" obj=updater
+t=2024-11-17T02:00:53-0700 lvl=info msg="update available" obj=updater
+t=2024-11-17T08:00:53-0700 lvl=info msg="update available" obj=updater
+t=2024-11-17T14:00:54-0700 lvl=info msg="update available" obj=updater
+t=2024-11-17T20:00:55-0700 lvl=info msg="update available" obj=updater
+t=2024-11-18T02:00:55-0700 lvl=info msg="update available" obj=updater
+t=2024-11-18T08:00:56-0700 lvl=info msg="update available" obj=updater
+t=2024-11-18T14:00:56-0700 lvl=info msg="update available" obj=updater
+t=2024-11-18T20:00:56-0700 lvl=info msg="update available" obj=updater
+t=2024-11-19T02:00:56-0700 lvl=info msg="update available" obj=updater
+t=2024-11-19T08:00:57-0700 lvl=info msg="update available" obj=updater
+t=2024-11-19T14:00:57-0700 lvl=info msg="update available" obj=updater
+t=2024-11-19T20:00:57-0700 lvl=info msg="update available" obj=updater
+t=2024-11-20T02:00:58-0700 lvl=info msg="update available" obj=updater
+t=2024-11-20T08:00:58-0700 lvl=info msg="update available" obj=updater
+t=2024-11-20T14:00:58-0700 lvl=info msg="update available" obj=updater
+t=2024-11-20T20:00:58-0700 lvl=info msg="update available" obj=updater
+t=2024-11-21T02:00:59-0700 lvl=info msg="update available" obj=updater
+t=2024-11-21T08:00:59-0700 lvl=info msg="update available" obj=updater
+t=2024-11-21T14:01:00-0700 lvl=info msg="update available" obj=updater
+t=2024-11-21T20:01:03-0700 lvl=info msg="update available" obj=updater
+t=2024-11-22T02:01:04-0700 lvl=info msg="update available" obj=updater
+t=2024-11-22T08:01:09-0700 lvl=warn msg="failed to check for update" obj=updater err="Post \"https://update.equinox.io/check\": context deadline exceeded"
+t=2024-11-22T13:06:06-0700 lvl=eror msg="session closed, starting reconnect loop" obj=tunnels.session obj=csess id=4b7113e198ad err="read EOF from remote peer"
+t=2024-11-22T13:06:06-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-22T13:06:07-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-22T13:06:09-0700 lvl=eror msg="failed to reconnect session" obj=tunnels.session err="authentication failed: Your account is limited to 1 simultaneous ngrok agent sessions.\nYou can run multiple simultaneous tunnels from a single agent session by defining the tunnels in your agent configuration file and starting them with the command `ngrok start --all`.\nRead more about the agent configuration file: https://ngrok.com/docs/secure-tunnels/ngrok-agent/reference/config\nYou can view your current agent sessions in the dashboard:\nhttps://dashboard.ngrok.com/agents\r\n\r\nERR_NGROK_108\r\n"
+t=2024-11-22T13:06:11-0700 lvl=info msg="client session established" obj=tunnels.session
+t=2024-11-22T13:06:11-0700 lvl=info msg="tunnel session started" obj=tunnels.session
+t=2024-11-22T13:06:29-0700 lvl=eror msg="heartbeat timeout, terminating session" obj=tunnels.session obj=csess id=74358281a044 clientid=23b69842e8548a437e1e6e2c8b382d32
+t=2024-11-22T14:01:10-0700 lvl=info msg="update available" obj=updater
+t=2024-11-22T20:01:11-0700 lvl=info msg="update available" obj=updater
+t=2024-11-23T02:01:11-0700 lvl=info msg="update available" obj=updater
+t=2024-11-23T08:01:11-0700 lvl=info msg="update available" obj=updater
+t=2024-11-23T14:01:11-0700 lvl=info msg="update available" obj=updater
+t=2024-11-23T20:01:12-0700 lvl=info msg="update available" obj=updater
+t=2024-11-24T02:01:12-0700 lvl=info msg="update available" obj=updater
+t=2024-11-24T08:01:12-0700 lvl=info msg="update available" obj=updater
+t=2024-11-24T14:01:13-0700 lvl=info msg="update available" obj=updater
+t=2024-11-24T20:01:13-0700 lvl=info msg="update available" obj=updater
+t=2024-11-25T02:01:13-0700 lvl=info msg="update available" obj=updater
+t=2024-11-25T08:01:14-0700 lvl=info msg="update available" obj=updater
+t=2024-11-25T14:01:14-0700 lvl=info msg="update available" obj=updater
+t=2024-11-25T20:01:14-0700 lvl=info msg="update available" obj=updater
+t=2024-11-26T02:01:15-0700 lvl=info msg="update available" obj=updater
+t=2024-11-26T08:01:15-0700 lvl=info msg="update available" obj=updater
+t=2024-11-26T14:01:15-0700 lvl=info msg="update available" obj=updater
+t=2024-11-26T20:01:15-0700 lvl=info msg="update available" obj=updater
+t=2024-11-27T02:01:16-0700 lvl=info msg="update available" obj=updater
+t=2024-11-27T08:01:16-0700 lvl=info msg="update available" obj=updater
+t=2024-11-27T14:01:16-0700 lvl=info msg="update available" obj=updater
+t=2024-11-27T20:01:16-0700 lvl=info msg="update available" obj=updater
+t=2024-11-28T02:01:17-0700 lvl=info msg="update available" obj=updater
+t=2024-11-28T08:01:17-0700 lvl=info msg="update available" obj=updater
+t=2024-11-28T14:01:17-0700 lvl=info msg="update available" obj=updater
+t=2024-11-28T20:01:17-0700 lvl=info msg="update available" obj=updater
+t=2024-11-29T02:01:18-0700 lvl=info msg="update available" obj=updater
+t=2024-11-29T08:01:18-0700 lvl=info msg="update available" obj=updater
+t=2024-11-29T14:01:19-0700 lvl=info msg="update available" obj=updater
+t=2024-11-29T20:01:20-0700 lvl=info msg="update available" obj=updater
+t=2024-11-30T02:01:20-0700 lvl=info msg="update available" obj=updater
+t=2024-11-30T08:01:21-0700 lvl=info msg="update available" obj=updater
+t=2024-11-30T14:01:21-0700 lvl=info msg="update available" obj=updater

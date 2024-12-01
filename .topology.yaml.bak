@@ -26,8 +26,13 @@ topology:
       startup-config: /home/student/git/csci5840/backup-configs/r5.cfg
     r6:
       kind: arista_ceos
+      startup-config: /home/student/git/csci5840/backup-configs/r6.cfg
     r7:
       kind: arista_ceos
+      startup-config: /home/student/git/csci5840/backup-configs/r7.cfg
+    r8:
+      kind: arista_ceos
+      startup-config: /home/student/git/csci5840/backup-configs/r8.cfg
     s1:
       kind: arista_ceos
       startup-config: /home/student/git/csci5840/backup-configs/s1.cfg
@@ -40,6 +45,9 @@ topology:
     s4:
       kind: arista_ceos
       startup-config: /home/student/git/csci5840/backup-configs/s4.cfg
+    s5:
+      kind: arista_ceos
+      startup-config: /home/student/git/csci5840/backup-configs/s5.cfg
     h1:
       kind: linux
     h2:
@@ -47,6 +55,12 @@ topology:
     h3:
       kind: linux
     h4:
+      kind: linux
+    h5:
+      kind: linux
+    h6:
+      kind: linux
+    h7:
       kind: linux
     webserver:
       kind: linux
@@ -71,3 +85,8 @@ topology:
     - endpoints:  ["s3:eth4", "host:eth1"]
     - endpoints:  ["r4:eth4", "r6:eth1"]
     - endpoints:  ["r6:eth2", "r7:eth2"]
+    - endpoints:  ["r7:eth1", "h5:eth1"]
+    - endpoints:  ["r8:eth1", "r2:eth3"]
+    - endpoints:  ["r8:eth2", "s5:eth1"]
+    - endpoints:  ["s5:eth3", "h6:eth1"]
+    - endpoints:  ["s5:eth4", "h7:eth1"]

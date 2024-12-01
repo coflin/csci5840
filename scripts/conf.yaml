@@ -1,0 +1,11 @@
+# Load anta.tests.software
+
+anta.tests.system:
+  - VerifyCPUUtilization:
+
+anta.tests.configuration:
+  - VerifyRunningConfigDiffs:
+
+anta.tests.routing:
+  ospf:
+    - VerifyOSPFNeighborState:
