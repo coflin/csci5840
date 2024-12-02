@@ -1,0 +1,11 @@
+--- Golden Config
++++ Current Config
+@@ -3,7 +3,7 @@
+ !
+ no aaa root
+ !
+-username admin privilege 15 role network-admin secret sha512 $6$Tdahnlk7lX52sLNU$NXSc9m9W1TyLxk3HLz0pd89YIEZvlJMsw6hyHt5Yb.DORpNGXHHvGNR.R6MId4HP3rxldWJ2QjoxWZqIhHVjM0
++username admin privilege 15 role network-admin secret sha512 $6$LALGeeCN7.FnZMPS$zB8yF90bXLeKiYGe3rze4/RIjAhaXATfssVDVpQxEP.AM2pmHCiFcxpudmu4VdgQu9RYurGKqyq9db5u4ghno.
+ !
+ transceiver qsfp default-mode 4x10G
+ !

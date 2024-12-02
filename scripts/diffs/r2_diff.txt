@@ -1,14 +1,6 @@
 --- Golden Config
 +++ Current Config
-@@ -88,7 +88,6 @@
- ip address 100.0.0.1/29
- ipv6 enable
- ipv6 address 2050::1/64
--ip ospf hello-interval 20
- ospfv3 ipv6 area 0.0.0.0
- !
- interface Vlan100
-@@ -107,7 +106,6 @@
+@@ -175,7 +175,6 @@
  ipv6 route ::/0 2001:172:20:20::1
  !
  router ospf 1
