@@ -1,0 +1,17 @@
+router bgp {{ device.routing_protocols.bgp.asn }}
+   neighbor {{ device.routing_protocols.bgp.neighbor.ip }} remote-as {{ device.routing_protocols.bgp.neighbor.asn }}
+{% for network in device.routing_protocols.bgp.networks %}
+   network {{ network.prefix }}
+{% endfor %}
+{% if device.routing_protocols.bgp.redistribute %}
+{% for redistribute in device.routing_protocols.bgp.redistribute %}
+   {% if redistribute.protocol == 'ospf' %}
+   redistribute ospf {{ redistribute.process_id }} metric 5
+   {% elif redistribute.protocol == 'rip' %}
+   redistribute rip
+   {% elif redistribute.protocol == 'static' %}
+   redistribute static
+   {% endif %}
+{% endfor %}
+{% endif %}
+

@@ -1,0 +1,18 @@
+{% set dhcp_enabled = device.vlans | selectattr('dhcp_enabled', 'equalto', true) | list %}
+{% if dhcp_enabled %}
+dhcp server
+{% for vlan in dhcp_enabled %}
+   {% if vlan.ipv4_subnet %}
+      subnet {{ vlan.ipv4_subnet }}
+         range {{ vlan.dhcp_range_start }} {{ vlan.dhcp_range_end }}
+         name {{ vlan.name }}
+         default-gateway {{ vlan.default_gateway }}
+   {% endif %}
+   !
+   {% if vlan.ipv6_subnet %}
+      subnet {{ vlan.ipv6_subnet }}
+         range {{ vlan.dhcpv6_range_start }} {{ vlan.dhcpv6_range_end }}
+         name {{ vlan.name }}
+   {% endif %}
+{% endfor %}
+{% endif %}

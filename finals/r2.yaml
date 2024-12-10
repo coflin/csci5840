@@ -1,0 +1,17 @@
+device:
+  hostname: R2
+  interfaces:
+    - name: GigabitEthernet0/0
+      ipv4: 192.168.2.2 255.255.255.0
+    - name: GigabitEthernet0/1
+      ipv4: 192.168.3.1 255.255.255.0
+  routing_protocols:
+    bgp:
+      asn: 65002
+      neighbor:
+        ip: 192.168.2.1
+        asn: 65001
+      networks:
+        - prefix: 192.168.3.0 255.255.255.0
+        - prefix: 10.0.0.0 255.255.255.0
+

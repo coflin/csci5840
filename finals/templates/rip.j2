@@ -1,0 +1,18 @@
+router rip
+   version 2
+{% for network in device.routing_protocols.rip.networks %}
+   network {{ network.prefix }}
+{% endfor %}
+   no auto-summary
+{% if device.routing_protocols.rip.redistribute %}
+{% for redistribute in device.routing_protocols.rip.redistribute %}
+   {% if redistribute.protocol == 'ospf' %}
+   redistribute ospf {{ redistribute.process_id }} metric 5
+   {% elif redistribute.protocol == 'bgp' %}
+   redistribute bgp {{ redistribute.asn }}
+   {% elif redistribute.protocol == 'static' %}
+   redistribute static
+   {% endif %}
+{% endfor %}
+{% endif %}
+   no shutdown

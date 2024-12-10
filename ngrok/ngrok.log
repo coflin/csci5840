@@ -409,3 +409,5 @@ t=2024-12-09T16:48:28-0700 lvl=info msg="update available" obj=updater
 t=2024-12-09T22:48:28-0700 lvl=info msg="update available" obj=updater
 t=2024-12-10T04:48:28-0700 lvl=info msg="update available" obj=updater
 t=2024-12-10T10:48:28-0700 lvl=info msg="update available" obj=updater
+t=2024-12-10T12:10:07-0700 lvl=info msg="join connections" obj=join id=dbb825601ae0 l=127.0.0.1:8000 r=35.187.88.254:59020
+t=2024-12-10T12:10:13-0700 lvl=info msg="join connections" obj=join id=10d8a1682d91 l=127.0.0.1:8000 r=35.187.88.254:45216

@@ -1,0 +1,44 @@
+device:
+  hostname: R1
+  interfaces:
+    - name: GigabitEthernet0/0
+      ipv4: 192.168.1.1 255.255.255.0
+    - name: GigabitEthernet0/1
+      ipv4: 192.168.2.1 255.255.255.0
+  vlans:  []
+  routes:
+    static:
+      - prefix: 192.168.100.0 255.255.255.0
+        next_hop: 192.168.1.2
+  routing_protocols:
+    ospf:
+      id: 1
+      networks:
+        - prefix: 192.168.1.0 0.0.0.255
+          area: 0
+        - prefix: 192.168.2.0 0.0.0.255
+          area: 0
+      redistribute:
+        - protocol: bgp
+          asn: 65000
+        - protocol: rip
+        - protocol: static
+    bgp:
+      asn: 65000
+      neighbor:
+        ip: 192.168.2.2
+        asn: 65001
+      networks:
+        - prefix: 192.168.1.0 255.255.255.0
+      redistribute:
+        - protocol: ospf
+          process_id: 1
+        - protocol: rip
+    rip:
+      networks:
+        - prefix: 192.168.1.0
+      redistribute:
+        - protocol: ospf
+          process_id: 1
+        - protocol: bgp
+          asn: 65000

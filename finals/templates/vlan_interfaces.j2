@@ -1,0 +1,27 @@
+{% for vlan in device.vlans %}
+interface Vlan{{ vlan.id }}
+   {% if vlan.mtu %}
+   mtu {{ vlan.mtu }}
+   {% endif %}
+   {% if vlan.ipv4_subnet %}
+   ip address {{ vlan.ipv4_subnet }}
+   {% endif %}
+   {% if vlan.dhcp_enabled %}
+   dhcp server ipv4
+   dhcp server ipv6
+   {% endif %}
+   {% if vlan.ipv6_subnet %}
+   ipv6 enable
+   ipv6 address {{ vlan.ipv6_subnet }}
+   {% endif %}
+   {% if vlan.ospfv3 %}
+   ospfv3 ipv6 area {{ vlan.ospfv3.area }}
+   {% endif %}
+   {% if vlan.ipv4_virtual_router_address %}
+   ip virtual-router address {{ vlan.ipv4_virtual_router_address }}
+   {% endif %}
+   {% if vlan.ipv6_virtual_router_address %}
+   ipv6 virtual-router address {{ vlan.ipv6_virtual_router_address }}
+   {% endif %}
+!
+{% endfor %}
