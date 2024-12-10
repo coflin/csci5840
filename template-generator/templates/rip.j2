@@ -1,6 +1,8 @@
 router rip
+   version 2
 {% for network in device.routing_protocols.rip.networks %}
    network {{ network.prefix }}
 {% endfor %}
-   redistribute ospf
+   no auto-summary
    no shutdown
+   redistribute ospf 1 metric 5

@@ -2,4 +2,5 @@ router ospf {{ device.routing_protocols.ospf.id }}
 {% for network in device.routing_protocols.ospf.networks %}
    network {{ network.prefix }} area {{ network.area }}
 {% endfor %}
-   max-lsa 12000
+   redistribute rip subnets
+   redistribute bgp 65000 subnets

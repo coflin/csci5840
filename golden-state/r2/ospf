@@ -1,0 +1,5 @@
+Neighbor ID     Instance VRF      Pri State                  Dead Time   Address         Interface
+200.0.0.1       1        default  1   FULL/BDR               00:00:30    100.0.0.3       Vlan50
+192.168.100.2   1        default  1   2 WAYS/DROTHER         00:00:37    100.0.0.1       Vlan50
+200.0.0.2       1        default  1   FULL/DR                00:00:32    100.0.0.4       Vlan50
+

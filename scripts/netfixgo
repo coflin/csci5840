@@ -1,12 +1,27 @@
 #!/usr/bin/python3
-
 from netmiko import ConnectHandler
 from sshInfo import sshInfo
 from loguru import logger
 import os
 import difflib
 import time
+from slack_sdk.webhook import WebhookClient
 
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+
+def send_slack_notification(message, emoji=":warning:"):
+    """
+    Send a notification to Slack.
+    :param message: The message to send.
+    :param emoji: An emoji to prefix the message.
+    """
+    try:
+        webhook = WebhookClient(SLACK_WEBHOOK_URL)
+        response = webhook.send(text=f"{emoji} {message}")
+        if response.status_code != 200:
+            logger.warning("Failed to send Slack notification.")
+    except Exception as e:
+        logger.error(f"Error sending Slack notification: {e}")
 
 def normalize_config(config):
     """
@@ -72,7 +87,7 @@ def compare_configs(net_connect, device_name, current_config, golden_config_path
         # Collect differences
         differences = "\n".join(diff)
         if differences:
-            logger.warning(f"Differences found for {device_name}:\n{differences}")
+            logger.warning(f"Divergences found on {device_name}:\n{differences}")
             diff_file = f"diffs/{device_name}_diff.txt"
             with open(diff_file, "w") as file:
                 file.write(differences)
@@ -95,12 +110,16 @@ def compare_configs(net_connect, device_name, current_config, golden_config_path
             # Apply golden configuration to ensure compliance
             net_connect.send_config_from_file(golden_config_path)
             logger.success("Reverted the config back to golden config")
+            send_slack_notification(f"Divergences found on {device_name}. Configuration reverted to the golden configuration.", ":warning:")
+
 
         else:
-            logger.debug(f"No differences found for {device_name}. Configuration is compliant.")
+            logger.debug(f"No divergences found for {device_name}. Configuration is compliant.")
 
     except Exception as e:
         logger.error(f"Error comparing configs for {device_name}: {e}")
+        send_slack_notification(f"There was some error in comapring configs for {device_name}", ":x:")
+
 
 
 def parse_ospf_neighbors(output):
@@ -199,9 +218,13 @@ def compare_ospf_config(net_connect, device_name, neighbor_id):
         # Step 1: Check for 'shutdown' in OSPF configuration
         ospf_config_device = net_connect.send_command("show running-config | section router ospf")
         if "shutdown" in ospf_config_device:
-            logger.warning(f"OSPF configuration on {device_name} has 'shutdown'. Fixing...")
+            logger.warning(f"OSPF is shut on {device_name}. Fixing...")
+            send_slack_notification(f"OSPF is shut on {device_name}.", ":rotating_light:")
+
             net_connect.send_config_set(["router ospf 1", "no shutdown"])
             logger.debug(f"Removed 'shutdown' from OSPF configuration on {device_name}.")
+            send_slack_notification(f"Removed 'shutdown' command from OSPF config on {device_name}", ":trophy:")
+
             time.sleep(10)  # Wait and re-check state
             return
 
@@ -220,6 +243,8 @@ def compare_ospf_config(net_connect, device_name, neighbor_id):
                 ]
                 net_connect.send_config_set(commands)
                 logger.debug(f"Fixed timers for interface {interface['interface']} on {device_name}.")
+                send_slack_notification(f"Changed OSPF timers on {device_name}:{interface['interface']} to 10 (hello),40 (dead),5 (retransmit)", ":trophy:")
+              
             time.sleep(10)  # Wait and re-check state
         else:
             logger.debug(f"All OSPF timers on {device_name} are correctly configured.")
@@ -243,11 +268,16 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
 
     problematic_neighbors = list(missing_neighbors)  # For further checks, if needed
 
+    missing_ospf_neighbors = []
     # Log missing neighbors
     if missing_neighbors:
         logger.error(f"Missing OSPF neighbors on {device_name}:")
         for neighbor_id in missing_neighbors:
+            missing_ospf_neighbors.append(neighbor_id)
             logger.error(f"  {neighbor_id}")
+        
+        formatted_neighbors = "\n".join([f"- {neighbor}" for neighbor in missing_ospf_neighbors])
+        send_slack_notification(f"The following neighbors are missing on {device_name}:\n{formatted_neighbors}", ":rotating_light:")
 
     # Check state mismatches
     for neighbor_id, state in live_neighbors_map.items():
@@ -255,6 +285,8 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
             # Ignore states starting with '2' (e.g., '2WAY/DROTHER')
             if not (state.startswith("2") or state.startswith("FULL")):
                 logger.error(f"Neighbor {neighbor_id} on {device_name} is in state {state}, expected 2WAY or FULL.")
+                send_slack_notification(f"Neighbor {neighbor_id} on {device_name} in is OSPF state {state}", ":rotating_light:")
+        
                 problematic_neighbors.append(neighbor_id)
 
     # Log unexpected neighbors
@@ -280,6 +312,8 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
             rechecked_live_neighbors_map[neighbor_id].startswith("FULL")
         ):
             logger.success(f"Neighbor {neighbor_id} on {device_name} matches the golden state after fixing 'shutdown'.")
+            send_slack_notification(f"Neighbor {neighbor_id} on {device_name} OSPF state matches the golden state now", ":white_check_mark:")
+
             successfully_fixed = True
             continue
 
@@ -289,6 +323,8 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
             interfaces_to_fix = parse_ospf_timers(interface_timers_output)
             if interfaces_to_fix:
                 logger.warning(f"Timer mismatches detected on {device_name}. Fixing timers...")
+                send_slack_notification(f"OSPF timer mismatches detected on {device_name}", ":rotating_light:")
+
                 for interface in interfaces_to_fix:
                     commands = [
                         f"interface {interface['interface']}",
@@ -298,6 +334,8 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
                     ]
                     net_connect.send_config_set(commands)
                     logger.debug(f"Fixed timers for interface {interface['interface']} on {device_name}.")
+                    send_slack_notification(f"Fixed OSPF timers on {device_name}: {interface['interface']}", ":trophy:")
+
                 logger.debug(f"Re-checking OSPF neighbors on {device_name} after fixing timers in 10s...")
                 time.sleep(10)  # Wait for state to stabilize
                 rechecked_output = net_connect.send_command("show ip ospf neighbor")
@@ -309,12 +347,15 @@ def compare_ospf_neighbors(device_name, live_neighbors, golden_neighbors, net_co
                     rechecked_live_neighbors_map[neighbor_id].startswith("FULL")
                 ):
                     logger.success(f"Neighbor {neighbor_id} on {device_name} matches the golden state after fixing timers.")
+                    send_slack_notification(f"Neighbor {neighbor_id} on {device_name} OSPF matches the golden state now", ":white_check_mark:")
                     successfully_fixed = True
                     continue
 
         # If all steps fail, log the issue for manual intervention
         if not successfully_fixed:
             logger.error(f"Unable to resolve OSPF issue for neighbor {neighbor_id} on {device_name}. Please check manually.")
+            send_slack_notification(f"Unable to resolve OSPF issue for neighbor {neighbor_id} on {device_name}. Please check manually.", ":rotating_light:")
+
 
     # Log final status
     if not problematic_neighbors:
@@ -338,6 +379,8 @@ def check_ospf_neighbors(net_connect, device_name):
 
     except Exception as e:
         logger.error(f"Error checking OSPF neighbors on {device_name}: {e}")
+        send_slack_notification(f"Error checking OSPF neighbors on {device_name}: {e}", ":rotating_light:")
+
 
 
 def main():
