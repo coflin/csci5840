@@ -7,7 +7,7 @@ import difflib
 import time
 from slack_sdk.webhook import WebhookClient
 
-SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
+SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/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"
 
 def send_slack_notification(message, emoji=":warning:"):
     """

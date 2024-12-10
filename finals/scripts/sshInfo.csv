@@ -1,0 +1,5 @@
+Routers,Device_Type,IP,Username,Password
+r1,arista_eos,192.168.100.2,admin,admin
+r2,cisco_ios,192.168.100.3,admin,admin
+r3,cisco_ios,192.168.100.4,admin,admin
+r4,cisco_ios,192.168.100.5,admin,admin
