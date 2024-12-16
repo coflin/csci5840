@@ -10,8 +10,6 @@
 - [Usage](#usage)
 - [Project Structure](#project-structure)
 - [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgements](#acknowledgements)
 
 ## Introduction
 
@@ -24,6 +22,7 @@ Advanced Network Automation is designed to streamline network device configurati
 - **Automated Syntax Checking**: Utilize J2Lint to ensure template accuracy.
 - **Network Simulation**: Employ Containerlab for testing network topologies.
 - **CI/CD Integration**: Integrate with Jenkins for automated testing and deployment.
+- **Self healing automated network troubleshooting**: Integrated Slack API for real-time notfiications.
 
 ## Installation
 
@@ -34,10 +33,34 @@ Advanced Network Automation is designed to streamline network device configurati
 2. **Navigate to the Project Directory**:
    ```bash
    cd Advanced-Network-Automation
-   python3 -m venv env
-   source env/bin/activate   # On Unix/Linux
-   env\Scripts\activate      # On Windows
    ```
+**Usage**
+
+Start the Containerlab topology:
+```bash
+sudo containerlab deploy -t topology.yaml
+```
+
+**Project Structure**
+```bash
+Advanced-Network-Automation/
+├── configs/
+│   ├── example_config.yaml
+│   └── ...
+├── templates/
+│   ├── example_template.j2
+│   └── ...
+├── scripts/
+│   ├── deploy.py
+│   └── validate.py
+├── tests/
+│   ├── test_deploy.py
+│   └── ...
+├── requirements.txt
+├── README.md
+└── ...
+```
+
 **Contributing**
 Contributions are welcome! Please follow these steps:
 
