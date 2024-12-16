@@ -34,14 +34,14 @@ Advanced Network Automation is designed to streamline network device configurati
    ```bash
    cd Advanced-Network-Automation
    ```
-**Usage**
+## Usage
 
 Start the Containerlab topology:
 ```bash
 sudo containerlab deploy -t topology.yaml
 ```
 
-**Project Structure**
+## Project Structure
 ```bash
 Advanced-Network-Automation/
 ├── configs/
@@ -61,7 +61,7 @@ Advanced-Network-Automation/
 └── ...
 ```
 
-**Contributing**
+## Contributing
 Contributions are welcome! Please follow these steps:
 
 Fork the repository.
