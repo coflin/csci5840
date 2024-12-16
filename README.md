@@ -67,7 +67,7 @@ Contributions are welcome! Please follow these steps:
 Fork the repository.
 Create a feature branch 
 ```bash
-git checkout -b feature-branch-name).
+git checkout -b feature-branch-name
 ```
 Commit your changes 
 ```bash
