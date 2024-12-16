@@ -1,52 +1,91 @@
-# **Network Automation**
+Advanced Network Automation
 
-Description
-This repository contains code and resources for network automation, utilizing Jinja2 templates and YAML files to configure network devices. The project leverages tools like J2Lint for linting, Containerlab for simulation, and integration with Jenkins for continuous integration.
+Automating network configurations with Jinja2 templates, YAML, and robust CI/CD integration.
+
+Table of Contents
+Introduction
 Features
-
-    Jinja2 Templates for Configuration
-    YAML file generation
-    Automated syntax checking with J2Lint
-    Continuous integration with Jenkins
-
-Setup Instructions
-
-    Clone the repository:
-
-    bash
-
-git clone https://github.com/coflin/csci5840.git
-
-Install dependencies:
-
-bash
-
-    pip install -r requirements.txt
-
-Running the Project
-
-    Generate YAML from templates:
-
-    bash
-
-python generate_yaml.py
-
-Lint templates:
-
-bash
-
-    j2lint templates/
-
-Directory Structure
-
-bash
-
-├── config-templates/  # Jinja2 templates
-├── generated-configs/ # Generated YAML files
-├── clab-netman/       # Containerlab network topology
-├── Jenkinsfile        # Jenkins CI configuration
-└── README.md          # Project overview
-
+Installation
+Usage
+Project Structure
 Contributing
+License
+Acknowledgements
+Introduction
+Advanced Network Automation is designed to streamline network device configurations using Jinja2 templates and YAML files. The project incorporates tools like J2Lint for syntax checking, Containerlab for network simulation, and Jenkins for continuous integration, aiming to enhance efficiency and reduce manual errors in network management.
 
-Feel free to contribute by creating issues or pull requests.
+Features
+Jinja2 Templates: Facilitate dynamic and reusable network configurations.
+YAML Configuration: Enable straightforward and human-readable configuration files.
+Automated Syntax Checking: Utilize J2Lint to ensure template accuracy.
+Network Simulation: Employ Containerlab for testing network topologies.
+CI/CD Integration: Integrate with Jenkins for automated testing and deployment.
+Installation
+Clone the Repository:
+
+bash
+Copy code
+git clone https://github.com/coflin/Advanced-Network-Automation.git
+Navigate to the Project Directory:
+
+bash
+Copy code
+cd Advanced-Network-Automation
+Set Up a Virtual Environment (optional but recommended):
+
+bash
+Copy code
+python3 -m venv env
+source env/bin/activate   # On Windows: env\Scripts\activate
+Install Dependencies:
+
+bash
+Copy code
+pip install -r requirements.txt
+Usage
+Configure YAML Files: Define your network device configurations in the configs/ directory.
+
+Generate Configurations: Use the provided scripts to generate device configurations from Jinja2 templates and YAML files.
+
+Validate Templates: Run J2Lint to check for syntax errors:
+
+bash
+Copy code
+j2lint templates/
+Simulate Network: Set up your network topology using Containerlab:
+
+bash
+Copy code
+sudo containerlab deploy -t topology.yaml
+Continuous Integration: Jenkins will automatically run tests and deploy configurations as per the defined pipelines.
+
+Project Structure
+plaintext
+Copy code
+Advanced-Network-Automation/
+├── configs/                 # YAML configuration files
+├── templates/               # Jinja2 templates
+├── scripts/                 # Automation scripts
+├── tests/                   # Test cases
+├── Jenkinsfile              # Jenkins pipeline configuration
+├── topology.yaml            # Containerlab topology definition
+└── README.md                # Project documentation
+Contributing
+Contributions are welcome! Please follow these steps:
+
+Fork the Repository: Click on the 'Fork' button at the top right corner of this page.
+
+Create a New Branch:
+
+bash
+Copy code
+git checkout -b feature/YourFeatureName
+Commit Your Changes:
+
+bash
+Copy code
+git commit -m 'Add some feature'
+Push to the Branch:
+
+git push origin feature/YourFeatureName
+Open a Pull Request: Navigate to the repository on GitHub and click the 'New Pull Request' button.
